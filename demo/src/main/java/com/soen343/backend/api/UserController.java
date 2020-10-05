@@ -1,7 +1,7 @@
-package com.soen341.backend.api;
+package com.soen343.backend.api;
 
-import com.soen341.backend.model.User;
-import com.soen341.backend.service.UserService;
+import com.soen343.backend.model.User;
+import com.soen343.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
-package com.soen341.backend.dao;
+package com.soen343.backend.dao;
 
-import com.soen341.backend.model.User;
+import com.soen343.backend.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

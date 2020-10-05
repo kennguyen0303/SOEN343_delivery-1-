@@ -1,4 +1,4 @@
-package com.soen341.backend.model;
+package com.soen343.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

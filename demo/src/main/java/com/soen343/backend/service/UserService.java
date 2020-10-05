@@ -1,7 +1,7 @@
-package com.soen341.backend.service;
+package com.soen343.backend.service;
 
-import com.soen341.backend.dao.UserDAO;
-import com.soen341.backend.model.User;
+import com.soen343.backend.dao.UserDAO;
+import com.soen343.backend.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
