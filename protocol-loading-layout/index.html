@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play with this page ! </title>
+</head>
+<body>
+    <div class="" id="demo"></div>
+    <canvas id="myCanvas" width="500" height="400"
+style="border:1px solid black;">
+Your browser does not support the canvas element.
+</canvas>
+    <script>
+   
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+         myObj = JSON.parse(this.responseText);
+        var array=myObj.listOfRoom;
+        //so, accessing the js object at here: start drawing here?
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        //drawing starts
+        for (var key1 of Object.keys(myObj)) {
+            for (var key2 of Object.keys(myObj[key1])) {//loop over each room
+                //put name p/s: hardcode name position need to fix later
+                if(key2=="name"){
+                    ctx.font = "15px Arial";
+                    if(myObj[key1][key2]=="kitchen") ctx.fillText(myObj[key1][key2],200,30);
+                    if(myObj[key1][key2]=="living room") ctx.fillText(myObj[key1][key2],20,50);
+                }
+                //draw the wall and leave space for door, window
+                if(myObj[key1][key2].length>4){
+                    ctx.moveTo(myObj[key1][key2][0],myObj[key1][key2][1]);
+                    ctx.lineTo(myObj[key1][key2][2],myObj[key1][key2][3]);
+                    ctx.stroke();
+                    ctx.moveTo(myObj[key1][key2][4],myObj[key1][key2][5]);
+                    ctx.lineTo(myObj[key1][key2][6],myObj[key1][key2][7]);
+                    ctx.stroke();
+                }
+                else{//no need for door/window
+                    ctx.moveTo(myObj[key1][key2][0],myObj[key1][key2][1]);
+                    ctx.lineTo(myObj[key1][key2][2],myObj[key1][key2][3]);
+                    ctx.stroke();
+                }
+                
+            };//finish rendering a room
+            //how to deal with window and door object ? since need to create a controller for it later on
+            
+        };
+    
+       
+  }
+};
+xmlhttp.open("GET", "layout.json", true);
+xmlhttp.send();
+    
+    </script>
+</body>
+</html>
