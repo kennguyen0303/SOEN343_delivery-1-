@@ -7,13 +7,24 @@
 </head>
 <body>
     <button onclick="renderLayout()">Click to render the layout</button>
+    <button onclick="startGame()">Click to render the game</button>
     <canvas id="myCanvas" width="500" height="400"
 style="border:1px solid black;">
 Your browser does not support the canvas element.
 </canvas>
-   
+   <h3>Controlling: </h3>
+   <select name="" id="control_option">
+       <option value="1">1</option>
+       <option value="2">2</option>
+   </select>
+   <h4>Use arrow button to move </h4>
    <script>
-   function renderLayout(){
+    /**
+    *Header 
+    *@return a layout
+    */
+   function renderLayout()
+   {
         var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -58,7 +69,84 @@ Your browser does not support the canvas element.
         xmlhttp.send();
             
    }
-      
+   //try the game
+   var myGamePiece;
+   var door2;
+   var being_on=true;
+   var option;
+function startGame() {
+    myGameArea.start();
+    myGamePiece = new component(20, 20, "red", 40, 200);
+    door2=new component(20, 20, "red", 130, 40);
+}
+
+var myGameArea = {
+    canvas : document.getElementById("myCanvas"),
+    start : function() {
+        
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateGameArea, 20);
+        window.addEventListener('keydown', function (e) {
+            myGameArea.key = e.keyCode;
+        })
+        window.addEventListener('keyup', function (e) {
+            myGameArea.key = false;
+        })
+    }, 
+    clear : function(){
+        this.context.clearRect(0, 200, this.canvas.width, this.canvas.height);
+        this.context.clearRect(130, 0, 20, this.canvas.height);
+    }
+}
+
+function component(width, height, color, x, y) {
+    this.gamearea = myGameArea;
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;    
+    this.update = function() {
+        ctx = myGameArea.context;
+        ctx.fillStyle = color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+    this.newPos = function() {
+        this.x += this.speedX;
+        this.y += this.speedY;        
+    }
+}
+
+function updateGameArea() {
+    myGameArea.clear();
+    myGamePiece.speedX = 0;
+    myGamePiece.speedY = 0;  
+    door2.speedX = 0;
+    door2.speedY = 0;  
+    var option = document.getElementById("control_option").value;
+    if (myGameArea.key && myGameArea.key == 37) {
+        if(option==1) myGamePiece.speedX = -1;
+        if(option==2) door2.speedX = -1;
+         }
+    if (myGameArea.key && myGameArea.key == 38) {
+        if(option==2) door2.speedY = -1; }  
+    if (myGameArea.key && myGameArea.key == 39) {
+        if(option==1) myGamePiece.speedX = 1;
+        if(option==2) door2.speedX = 1; 
+    }
+    if (myGameArea.key && myGameArea.key == 40) {
+        if(option==2) door2.speedY = 1;
+    
+    }
+        //key in control is the update function
+    
+    myGamePiece.newPos();    
+    myGamePiece.update();
+    door2.newPos();    
+    door2.update();
+}
     </script>
 </body>
 </html>
