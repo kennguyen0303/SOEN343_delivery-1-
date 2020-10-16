@@ -102,7 +102,13 @@ function door(width, height, color, x, y,move_mode) {
     this.speedX = 0;
     this.speedY = 0;    
     this.x = x;
-    this.y = y;    
+    this.y = y;
+    if(this.move_mode=="horizontal"){//make a boundary for movement
+        this.boundary=[this.x,(this.x+this.width)];//inital point + width
+    }
+    if(this.move_mode=="vertical"){//make a boundary for movement
+        this.boundary=[this.y,(this.y+this.height)]
+    }        
     this.update = function() {
         ctx = this.gamearea.getContext("2d")
         ctx.fillStyle = color;
@@ -122,16 +128,20 @@ function updateGameArea() {
     });
     var option = document.getElementById("control_option").value - 1;//minus 1 since array start from 0
     if (myGameArea.key && myGameArea.key == 37) {//move left
-        if(door_array[option].move_mode=="horizontal") door_array[option].speedX = -1;
+        if(door_array[option].move_mode=="horizontal")
+            if(door_array[option].x>door_array[option].boundary[0]) door_array[option].speedX = -1;
          }
-    if (myGameArea.key && myGameArea.key == 38) {//move down
-        if(door_array[option].move_mode=="vertical") door_array[option].speedY = -1;
+    if (myGameArea.key && myGameArea.key == 38) {//move up
+        if(door_array[option].move_mode=="vertical") 
+        if(door_array[option].y>door_array[option].boundary[0]) door_array[option].speedY = -1;
         }  
     if (myGameArea.key && myGameArea.key == 39) {//move right
-        if(door_array[option].move_mode=="horizontal") door_array[option].speedX = 1;
+        if(door_array[option].move_mode=="horizontal") 
+        if(door_array[option].x<door_array[option].boundary[1]) door_array[option].speedX = 1;
     }
-    if (myGameArea.key && myGameArea.key == 40) {//move up
-        if(door_array[option].move_mode=="vertical") door_array[option].speedY = 1;
+    if (myGameArea.key && myGameArea.key == 40) {//move down
+        if(door_array[option].move_mode=="vertical") 
+        if(door_array[option].y<door_array[option].boundary[1]) door_array[option].speedY = 1;
     
     }
         

@@ -25,9 +25,9 @@
     
     "door":{
         "door1":[20, 5, "red", 20, 202,"horizontal"],
-        "door2":[5, 20, "blue", 143, 40,"vertical"],
-        "door3":[5,20, "blue", 293, 80,"vertical"],
-        "door4":[5, 20, "red", 293, 280,"vertical"]
+        "door2":[5, 20, "blue", 143, 20,"vertical"],
+        "door3":[5,20, "blue", 293, 60,"vertical"],
+        "door4":[5, 20, "red", 293, 260,"vertical"]
     }
 
 }
