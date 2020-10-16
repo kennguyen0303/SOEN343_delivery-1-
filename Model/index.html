@@ -75,7 +75,6 @@ var myGameArea = {
     canvas : document.getElementById("myCanvas"),
     start : function() {
         this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.interval;
         updateGameArea();
         window.addEventListener('keydown', function (e) {
