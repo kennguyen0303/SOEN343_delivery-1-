@@ -14,18 +14,26 @@ th,td {
 <h2>User</h2>
 
 <form name="roleSelect" action="" method = "Post">
+    <p>Add a new role:</p>
     <select name="roles" onchange="onClick(this.value)">
         <option value="Parent">Parent</option>
         <option value="Child">Child</option>
         <option value="Guest">Guest</option>
     </select>
 </form>
-<button name="edit" onclick="getUsers()">Get Users</button>
 <br>
 <br>
-<div>Current Registered Users</div>
-<div id="availableUsers"></div>
-
+<form onsubmit="onSubmitEditForm()">
+    <div>Current Registered Users</div>
+    <div id="availableUsers">
+        <select id="currentUsersList"></select>
+    </div>
+    <br>
+    <p>Enter a new role: </p>
+    <input type="text" id="newRole"></input>
+    <br>
+    <input type="submit">
+</form>
 <script>
 var loggedUserId;
 
@@ -34,7 +42,7 @@ function onClick(str) {
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        // do nothing?
+        getUsers();
     }
   };
 
@@ -53,7 +61,8 @@ function getUsers() {
 
    if (this.readyState == 4 && this.status == 200) {
       userArray = JSON.parse(this.responseText);
-      var select = document.createElement("select");
+
+      var select = document.getElementById("currentUsersList")
 
       for( var i=0; i< userArray.length; i++) {
         var option = document.createElement("option");
@@ -81,7 +90,6 @@ function editUser(newRole, id) {
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            // empty I guess
         }
       };
 
@@ -97,7 +105,7 @@ function deleteUser(id) {
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            // do nothing ??
+            getUsers();
         }
       };
 
@@ -126,6 +134,17 @@ function getUserById(id)
       xhttp.open("GET", "http://localhost:8080/api/user/" + id, true);
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send();
+}
+
+function onSubmitEditForm() {
+   var select = document.getElementById("currentUsersList");
+   console.log()
+   var userId = select.options[select.selectedIndex].value;
+   var newRole = document.getElementById("newRole").value;
+   var currentRole = getUserById(userId);
+
+   editUser(newRole, userId);
+   getUsers();
 }
 </script>
 </body>
