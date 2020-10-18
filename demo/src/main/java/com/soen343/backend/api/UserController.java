@@ -50,9 +50,4 @@ public class UserController {
     public void updateUserById(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody User userToUpdate ) {
         userService.updateUser(id, userToUpdate);
     }
-
-    @PutMapping(value="api/user/login", path = "{id}")
-    public void updateUserLoggedIn(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody User userToUpdate) {
-
-    }
 }

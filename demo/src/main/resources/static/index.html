@@ -78,6 +78,43 @@
       
               <div id="SHSystem" class="tabcontent">
                   Smart Home System Components
+                  <h2>User Management</h2>
+
+                  <!--Add a user profile-->
+                  <div name="createForm">
+                      <p>Add a new role:</p>
+                      <select name="roles" id="roleSelect">
+                          <option value="Parent">Parent</option>
+                          <option value="Child">Child</option>
+                          <option value="Guest">Guest</option>
+                      </select>
+                      <input type="button" onclick="onAddUserSubmit()" value="Add user">
+                  </div>
+
+                  <br>
+                  <br>
+
+                  <!--Edit a user profile-->
+                  <div name="editForm">
+                      <div>Current Registered Users</div>
+                      <div id="availableUsers">
+                          <select id="currentUsersList"></select>
+                      </div>
+                      <br>
+                      <div>Enter a new role:
+                          <input type="text" id="newRole">
+                      </div>
+
+                      <br>
+                      <input type="button" value="Edit Selected User" onclick="onSubmitEditForm()">
+                      <input type="button" value="Delete Selected User" onclick="onSubmitDeleteUser()">
+                  </div>
+
+                  <!--Delete a user profile-->
+                  <div id="deleteForm">
+
+                  </div>
+                  <br>
               </div>
       
               <div id="SHCore" class="tabcontent">
@@ -314,49 +351,7 @@ function updateGameArea() {
 
         }
         </script>
-<h2>User Management</h2>
 
-<!--Add a user profile-->
-<div name="createForm">
-    <p>Add a new role:</p>
-    <select name="roles" id="roleSelect">
-        <option value="Parent">Parent</option>
-        <option value="Child">Child</option>
-        <option value="Guest">Guest</option>
-    </select>
-    <input type="button" onclick="onAddUserSubmit()" value="Add user">
-</div>
-
-<br>
-<br>
-
-<!--Edit a user profile-->
-<div name="editForm">
-    <div>Current Registered Users</div>
-    <div id="availableUsers">
-        <select id="currentUsersList"></select>
-    </div>
-    <br>
-    <div>Enter a new role:
-        <input type="text" id="newRole">
-    </div>
-
-    <br>
-    <input type="button" value="Edit Selected User" onclick="onSubmitEditForm()">
-    <input type="button" value="Delete Selected User" onclick="onSubmitDeleteUser()">
-</div>
-
-<!--Delete a user profile-->
-<div id="deleteForm">
-
-</div>
-<br>
-
-<!--Time-->
-<form onsubmit="startTime(true)">
-    <input id="calendar" type="date">
-</form>
-<div id="time"></div>
 <script>
 var loggedUserId;
 var date = new Date();
@@ -483,35 +478,6 @@ function editUser(newRole, id) {
       xhttp.send(obj);
 }
 
-//Time
-function startTime(fromSubmit) {
-
-  if(fromSubmit)
-  {
-      var calendar = document.getElementById("calendar").value;
-      date.setDate(calendar)
-      today.setHours(hours)
-      today.setMinutes(minutes);
-      today.setSeconds(seconds);
-  }
-
-  var month = today.getMonth();
-  var day = today.getDay();
-  var year = today.getYear();
-  var hour = today.getHours();
-  var minute = today.getMinutes();
-  var second = today.getSeconds();
-  m = checkTime(m);
-  s = checkTime(s);
-  document.getElementById('time').innerHTML =
-  day + month+ year+","+ hour + ":" + minute + ":" + second;
-  var t = setTimeout(startTime, 500);
-}
-
-function checkTime(i) {
-  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-  return i;
-}
 </script>
 </body>
 </html>
