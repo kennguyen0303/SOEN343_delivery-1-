@@ -111,18 +111,18 @@
           </div>
           <div class = "console">Console Here</div>
     </div>
-    <div class="Daniela-test">
-        <form action="">
-            <select name="roles" onchange="addProfile(this.value)">
-                <option value="Parent">Parent</option>
-                <option value="Child">Child</option>
-                <option value="Guest">Guest</option>
-                <submit>Submit</submit>
-            </select>
-        </form>
-        <button onclick="getProfile()">Click to get the profiles</button>
-        <div id="showProfile"></div>
-    </div>
+<!--    <div class="Daniela-test">-->
+<!--        <form action="">-->
+<!--            <select name="roles" onchange="addProfile(this.value)">-->
+<!--                <option value="Parent">Parent</option>-->
+<!--                <option value="Child">Child</option>-->
+<!--                <option value="Guest">Guest</option>-->
+<!--                <submit>Submit</submit>-->
+<!--            </select>-->
+<!--        </form>-->
+<!--        <button onclick="getProfile()">Click to get the profiles</button>-->
+<!--        <div id="showProfile"></div>-->
+<!--    </div>-->
     
 
   <script>
@@ -292,13 +292,13 @@ function updateGameArea() {
              alert("added successfully");
           };
           }
-          var obj = { "name" : str};
+          var obj = { "role" : str};
           obj = JSON.stringify(obj);
           console.log(obj);
           xhttp.open("POST", "http://localhost:8080/api/user", true);
           xhttp.setRequestHeader("Content-type", "application/json");
           xhttp.send(obj);
-            
+
         }
         //get the profile !
         function getProfile() {
@@ -313,46 +313,53 @@ function updateGameArea() {
           xhttp.open("GET", "http://localhost:8080/api/user", true);
   xhttp.setRequestHeader("Content-type", "application/json");
   xhttp.send();
-            
+
         }
         </script>
+<h2>User Management</h2>
 
-
-
-<h2>User</h2>
-
-<form name="roleSelect" action="" method = "Post">
+<!--Add a user profile-->
+<div name="createForm">
     <p>Add a new role:</p>
-    <select name="roles" onchange="onClick(this.value)">
+    <select name="roles" id="roleSelect">
         <option value="Parent">Parent</option>
         <option value="Child">Child</option>
         <option value="Guest">Guest</option>
     </select>
-</form>
+    <input type="button" onclick="onAddUserSubmit()" value="Add user">
+</div>
+
 <br>
 <br>
-<form name="editForm" onsubmit="onSubmitEditForm()">
+
+<!--Edit a user profile-->
+<div name="editForm">
     <div>Current Registered Users</div>
     <div id="availableUsers">
         <select id="currentUsersList"></select>
     </div>
     <br>
-    <p>Enter a new role: </p>
-    <input type="text" id="newRole">
-    <br>
-    <input type="submit">
-</form>
+    <div>Enter a new role:
+        <input type="text" id="newRole">
+    </div>
 
-<form id="deleteForm" onSubmit="deleteUser()">
-    <input type="submit" value="Delete User">
-</form>
+    <br>
+    <input type="button" value="Edit Selected User" onclick="onSubmitEditForm()">
+    <input type="button" value="Delete Selected User" onclick="onSubmitDeleteUser()">
+</div>
+
+<!--Delete a user profile-->
+<div id="deleteForm">
+
+</div>
 <br>
+
+<!--Time-->
 <form onsubmit="startTime(true)">
     <input id="calendar" type="date">
 </form>
 <div id="time"></div>
 <script>
-// User
 var loggedUserId;
 var date = new Date();
 
@@ -382,6 +389,7 @@ function getUsers() {
       userArray = JSON.parse(this.responseText);
 
       var select = document.getElementById("currentUsersList")
+      removeAllChildNodes(select);
 
       for( var i=0; i< userArray.length; i++) {
         var option = document.createElement("option");
@@ -392,6 +400,7 @@ function getUsers() {
       }
 
       var item = document.getElementById("availableUsers");
+
       removeAllChildNodes(item);
       item.appendChild(select);
     }
@@ -401,7 +410,11 @@ function getUsers() {
   xhttp.send();
 }
 
-function onDelete() {
+function onAddUserSubmit() {
+
+  var select = document.getElementById("roleSelect");
+  var role = select.options[select.selectedIndex].value;
+  onClick(role);
 }
 
 function editUser(newRole, id) {
@@ -409,6 +422,7 @@ function editUser(newRole, id) {
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            getUsers();
         }
       };
 
@@ -419,7 +433,15 @@ function editUser(newRole, id) {
       xhttp.send(obj);
 }
 
-function deleteUser() {
+function onSubmitDeleteUser()
+{
+   var select = document.getElementById("currentUsersList");
+   var userId = select.options[select.selectedIndex].value;
+
+   deleteUser(id);
+}
+
+function deleteUser(id) {
       var xhttp;
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
@@ -439,8 +461,7 @@ function removeAllChildNodes(element) {
     }
 }
 
-function getUserById(id)
-{
+function getUserById(id) {
       var xhttp;
       var user;
       xhttp = new XMLHttpRequest();
@@ -457,13 +478,11 @@ function getUserById(id)
 
 function onSubmitEditForm() {
    var select = document.getElementById("currentUsersList");
-   console.log()
    var userId = select.options[select.selectedIndex].value;
    var newRole = document.getElementById("newRole").value;
    var currentRole = getUserById(userId);
 
    editUser(newRole, userId);
-   getUsers();
 }
 
 //Time
