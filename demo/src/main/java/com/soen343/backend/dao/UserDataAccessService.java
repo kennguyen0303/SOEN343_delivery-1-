@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository("userDao")
-public class FakeUserDataAccessService implements UserDAO {
+public class UserDataAccessService implements UserDAO {
 
     private List<User> DB = new ArrayList<>();
 
