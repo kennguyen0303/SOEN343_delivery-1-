@@ -46,7 +46,7 @@
       
               <!-- User-->
               <div class="row justify-content-center">
-                  <a href="#" style="text-decoration:underline;" >Parent</a>
+                  <a href="#" style="text-decoration:underline;" id="userDisplay">No user logged in</a>
               </div>
               <!-- /User-->
       
@@ -108,6 +108,7 @@
                       <br>
                       <input type="button" value="Edit Selected User" onclick="onSubmitEditForm()">
                       <input type="button" value="Delete Selected User" onclick="onSubmitDeleteUser()">
+                      <input input type="button" value="Login Selected User" onclick="onLoginSubmit()">
                   </div>
 
                   <!--Delete a user profile-->
@@ -368,11 +369,11 @@ function getUserById(id) {
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            user = JSON.parse(this.responseText);
+            return user = JSON.parse(this.responseText);
         }
       };
 
-      xhttp.open("GET", "http://localhost:8080/api/user/" + id, true);
+      xhttp.open("GET", "http://localhost:8080/api/user/userRetrieval/" + id, true);
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send();
 }
@@ -404,7 +405,7 @@ function getUsers() {
     }
   };
 
-  xhttp.open("GET", "http://localhost:8080/api/user", true);
+  xhttp.open("GET", "http://localhost:8080/api/user/allUserRetrieval", true);
   xhttp.send();
 }
 
@@ -426,7 +427,7 @@ function addUser(str) {
 
   var obj = { "role" : str};
   obj = JSON.stringify(obj);
-  xhttp.open("POST", "http://localhost:8080/api/user", true);
+  xhttp.open("POST", "http://localhost:8080/api/user/addUser", true);
   xhttp.setRequestHeader("Content-type", "application/json");
   xhttp.send(obj);
 }
@@ -448,7 +449,7 @@ function deleteUser(id) {
         }
       };
 
-      xhttp.open("DELETE", "http://localhost:8080/api/user/" + id, true);
+      xhttp.open("DELETE", "http://localhost:8080/api/user/userRemoval/" + id, true);
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send();
 }
@@ -473,9 +474,33 @@ function editUser(newRole, id) {
 
       var obj = { "role" : newRole};
       obj = JSON.stringify(obj);
-      xhttp.open("PUT", "http://localhost:8080/api/user/" + id, true);
+      xhttp.open("PUT", "http://localhost:8080/api/user/userUpdate/" + id, true);
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send(obj);
+}
+
+function onLoginSubmit()
+{
+   var select = document.getElementById("currentUsersList");
+   var userId = select.options[select.selectedIndex].value;
+   var role = select.options[select.selectedIndex].innerHTML;
+
+   logIn(userId,role);
+}
+
+function logIn(id, role)
+{
+      var xhttp;
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("userDisplay").innerHTML = role ;
+        }
+      };
+
+      xhttp.open("PUT", "http://localhost:8080/api/user/logIn/" + id, true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send();
 }
 
 </script>
