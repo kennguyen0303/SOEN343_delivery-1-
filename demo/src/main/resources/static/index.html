@@ -23,16 +23,20 @@ th,td {
 </form>
 <br>
 <br>
-<form onsubmit="onSubmitEditForm()">
+<form name="editForm" onsubmit="onSubmitEditForm()">
     <div>Current Registered Users</div>
     <div id="availableUsers">
         <select id="currentUsersList"></select>
     </div>
     <br>
     <p>Enter a new role: </p>
-    <input type="text" id="newRole"></input>
+    <input type="text" id="newRole">
     <br>
     <input type="submit">
+</form>
+
+<form id="deleteForm" onSubmit="deleteUser()">
+    <input type="submit" value="Delete User">
 </form>
 <br>
 <form onsubmit="startTime(true)">
@@ -42,6 +46,7 @@ th,td {
 <script>
 // User
 var loggedUserId;
+var date = new Date();
 
 function onClick(str) {
   var xhttp;
@@ -106,7 +111,7 @@ function editUser(newRole, id) {
       xhttp.send(obj);
 }
 
-function deleteUser(id) {
+function deleteUser() {
       var xhttp;
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
@@ -156,12 +161,10 @@ function onSubmitEditForm() {
 //Time
 function startTime(fromSubmit) {
 
-  var today = new Date();
   if(fromSubmit)
   {
-      today.setYear(year);
-      today.setMonth(month);
-      today.setDate(day);
+      var calendar = document.getElementById("calendar").value;
+      date.setDate(calendar)
       today.setHours(hours)
       today.setMinutes(minutes);
       today.setSeconds(seconds);
@@ -179,6 +182,7 @@ function startTime(fromSubmit) {
   day + month+ year+","+ hour + ":" + minute + ":" + second;
   var t = setTimeout(startTime, 500);
 }
+
 function checkTime(i) {
   if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
   return i;
