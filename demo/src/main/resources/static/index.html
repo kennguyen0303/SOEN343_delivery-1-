@@ -108,6 +108,7 @@
                       <br>
                       <input type="button" value="Edit Selected User" onclick="onSubmitEditForm()">
                       <input type="button" value="Delete Selected User" onclick="onSubmitDeleteUser()">
+                      <input input type="button" value="Login Selected User" onclick="onLoginSubmit()">
                   </div>
 
                   <!--Delete a user profile-->
@@ -476,6 +477,29 @@ function editUser(newRole, id) {
       xhttp.open("PUT", "http://localhost:8080/api/user/userUpdate/" + id, true);
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send(obj);
+}
+
+function onLoginSubmit()
+{
+   var select = document.getElementById("currentUsersList");
+   var userId = select.options[select.selectedIndex].value;
+
+   logIn(userId);
+}
+
+function logIn(id)
+{
+      var xhttp;
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
+      };
+
+      xhttp.open("PUT", "http://localhost:8080/api/user/logIn/" + id, true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send();
 }
 
 </script>
