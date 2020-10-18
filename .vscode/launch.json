@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Soen343Application<demo>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.soen343.backend.Soen343Application",
+            "projectName": "demo",
+            "args": ""
+        }
+    ]
+}

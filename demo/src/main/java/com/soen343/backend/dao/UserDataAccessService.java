@@ -8,21 +8,26 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository("fakeDao")
-public class FakeUserDataAccessService implements UserDAO {
+@Repository("userDao")
+public class UserDataAccessService implements UserDAO {
 
     private List<User> DB = new ArrayList<>();
 
     @Override
-    public int insertUser(UUID id, User user)
-    {
-        DB.add(new User(id, user.getName()));
+    public int insertUser(UUID id, User user) {
+        DB.add(new User(id, user.getRole()));
         return 1;
     }
 
-    public List<User> selectAllUsers()
-    {
+    public List<User> selectAllUsers() {
+
         return DB;
+    }
+
+    public Optional<User> selectUserByLoggedIn() {
+        return DB.stream()
+                .filter(user -> user.getIsLoggedUser() == true)
+                .findFirst();
     }
 
     @Override
@@ -31,6 +36,7 @@ public class FakeUserDataAccessService implements UserDAO {
                 .filter(user -> user.getId().equals(id))
                 .findFirst();
     }
+
 
     @Override
     public int deleteUserById(UUID id) {
@@ -52,7 +58,7 @@ public class FakeUserDataAccessService implements UserDAO {
                     int indexOfUserToUpdate = DB.lastIndexOf(user);
                     if(indexOfUserToUpdate >= 0) // we have found a person
                     {
-                        DB.set(indexOfUserToUpdate,  new User(id, updateUser.getName())); // set contents of the person to new person that was just received
+                        DB.set(indexOfUserToUpdate,  new User(id, updateUser.getRole())); // set contents of the person to new person that was just received
                         return 1;
                     }
                     return 0;

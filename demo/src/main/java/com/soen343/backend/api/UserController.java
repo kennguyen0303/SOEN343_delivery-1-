@@ -35,8 +35,7 @@ public class UserController {
     }
 
     @GetMapping(path = "{id}")
-    public User getUserById(@PathVariable("id") UUID id)
-    {
+    public User getUserById(@PathVariable("id") UUID id) {
         return userService.getUserById(id)
                 .orElse(null);
     }
@@ -48,8 +47,7 @@ public class UserController {
     }
 
     @PutMapping(path = "{id}")
-    public void updateUserById(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody User userToUpdate )
-    {
+    public void updateUserById(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody User userToUpdate ) {
         userService.updateUser(id, userToUpdate);
     }
 }
