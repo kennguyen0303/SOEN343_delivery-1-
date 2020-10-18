@@ -24,12 +24,6 @@ public class UserDataAccessService implements UserDAO {
         return DB;
     }
 
-    public Optional<User> selectUserByLoggedIn() {
-        return DB.stream()
-                .filter(user -> user.getIsLoggedUser() == true)
-                .findFirst();
-    }
-
     @Override
     public Optional<User> selectUserById(UUID id) {
         return DB.stream()
@@ -64,5 +58,34 @@ public class UserDataAccessService implements UserDAO {
                     return 0;
                 })
                 .orElse(0);
+    }
+
+    @Override
+    public int loginUser(UUID id) {
+
+        Optional<User> userToLogIn = selectUserById(id);
+
+        if(userToLogIn.isEmpty())
+        {
+            return 0; // indicates that no user was found and no action was taken
+        }
+        Optional<User> currentLoggedInUser = findCurrentLoggedInUser();
+
+        if(!currentLoggedInUser.isEmpty())
+        {
+            // log out the current user
+            currentLoggedInUser.get().setLoggedUser(false);
+        }
+
+        // log in new user
+        userToLogIn.get().setLoggedUser(true);
+
+        return 1;
+    }
+
+    private Optional<User> findCurrentLoggedInUser() {
+        return DB.stream()
+                .filter(user -> user.getIsLoggedUser() == true)
+                .findFirst();
     }
 }

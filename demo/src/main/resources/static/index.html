@@ -372,7 +372,7 @@ function getUserById(id) {
         }
       };
 
-      xhttp.open("GET", "http://localhost:8080/api/user/" + id, true);
+      xhttp.open("GET", "http://localhost:8080/api/user/userRetrieval/" + id, true);
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send();
 }
@@ -404,7 +404,7 @@ function getUsers() {
     }
   };
 
-  xhttp.open("GET", "http://localhost:8080/api/user", true);
+  xhttp.open("GET", "http://localhost:8080/api/user/allUserRetrieval", true);
   xhttp.send();
 }
 
@@ -426,7 +426,7 @@ function addUser(str) {
 
   var obj = { "role" : str};
   obj = JSON.stringify(obj);
-  xhttp.open("POST", "http://localhost:8080/api/user", true);
+  xhttp.open("POST", "http://localhost:8080/api/user/addUser", true);
   xhttp.setRequestHeader("Content-type", "application/json");
   xhttp.send(obj);
 }
@@ -448,7 +448,7 @@ function deleteUser(id) {
         }
       };
 
-      xhttp.open("DELETE", "http://localhost:8080/api/user/" + id, true);
+      xhttp.open("DELETE", "http://localhost:8080/api/user/userRemoval/" + id, true);
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send();
 }
@@ -473,7 +473,7 @@ function editUser(newRole, id) {
 
       var obj = { "role" : newRole};
       obj = JSON.stringify(obj);
-      xhttp.open("PUT", "http://localhost:8080/api/user/" + id, true);
+      xhttp.open("PUT", "http://localhost:8080/api/user/userUpdate/" + id, true);
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send(obj);
 }

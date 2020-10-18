@@ -16,8 +16,7 @@ public class UserService {
     private final UserDAO userDAO;
 
     @Autowired
-    public UserService(@Qualifier("userDao") UserDAO userDAO)
-    {
+    public UserService(@Qualifier("userDao") UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 
@@ -40,6 +39,11 @@ public class UserService {
     }
 
     public int updateUser(UUID id, User newUser) {
+
         return userDAO.updateUserById(id, newUser);
+    }
+
+    public int loginUser(UUID id){
+        return userDAO.loginUser(id);
     }
 }

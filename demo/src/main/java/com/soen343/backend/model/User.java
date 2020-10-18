@@ -27,10 +27,12 @@ public class User {
         return isLoggedUser;
     }
 
-
-
     public UUID getId() {
-
         return id;
+    }
+
+    public void setLoggedUser(boolean isLoggedIn)
+    {
+        isLoggedUser = isLoggedIn;
     }
 }

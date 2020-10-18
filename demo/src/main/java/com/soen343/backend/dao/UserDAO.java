@@ -10,8 +10,7 @@ public interface UserDAO {
 
     int insertUser(UUID id, User user);
 
-    default int insertUser(User user)
-    {
+    default int insertUser(User user) {
         UUID id = UUID.randomUUID();
         return insertUser(id, user);
     };
@@ -23,4 +22,6 @@ public interface UserDAO {
     int deleteUserById(UUID id);
 
     int updateUserById(UUID id, User user);
+
+    int loginUser(UUID id);
 }
