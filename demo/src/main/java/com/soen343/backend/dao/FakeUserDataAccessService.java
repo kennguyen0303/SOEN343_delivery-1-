@@ -16,7 +16,7 @@ public class FakeUserDataAccessService implements UserDAO {
     @Override
     public int insertUser(UUID id, User user)
     {
-        DB.add(new User(id, user.getName()));
+        DB.add(new User(id, user.getRole()));
         return 1;
     }
 
@@ -52,7 +52,7 @@ public class FakeUserDataAccessService implements UserDAO {
                     int indexOfUserToUpdate = DB.lastIndexOf(user);
                     if(indexOfUserToUpdate >= 0) // we have found a person
                     {
-                        DB.set(indexOfUserToUpdate,  new User(id, updateUser.getName())); // set contents of the person to new person that was just received
+                        DB.set(indexOfUserToUpdate,  new User(id, updateUser.getRole())); // set contents of the person to new person that was just received
                         return 1;
                     }
                     return 0;

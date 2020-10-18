@@ -124,7 +124,7 @@
         <div id="showProfile"></div>
     </div>
     
-  </body>
+
   <script>
     /**
     *Header 
@@ -316,4 +316,185 @@ function updateGameArea() {
             
         }
         </script>
+
+
+
+<h2>User</h2>
+
+<form name="roleSelect" action="" method = "Post">
+    <p>Add a new role:</p>
+    <select name="roles" onchange="onClick(this.value)">
+        <option value="Parent">Parent</option>
+        <option value="Child">Child</option>
+        <option value="Guest">Guest</option>
+    </select>
+</form>
+<br>
+<br>
+<form name="editForm" onsubmit="onSubmitEditForm()">
+    <div>Current Registered Users</div>
+    <div id="availableUsers">
+        <select id="currentUsersList"></select>
+    </div>
+    <br>
+    <p>Enter a new role: </p>
+    <input type="text" id="newRole">
+    <br>
+    <input type="submit">
+</form>
+
+<form id="deleteForm" onSubmit="deleteUser()">
+    <input type="submit" value="Delete User">
+</form>
+<br>
+<form onsubmit="startTime(true)">
+    <input id="calendar" type="date">
+</form>
+<div id="time"></div>
+<script>
+// User
+var loggedUserId;
+var date = new Date();
+
+function onClick(str) {
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        getUsers();
+    }
+  };
+
+  var obj = { "role" : str};
+  obj = JSON.stringify(obj);
+  xhttp.open("POST", "http://localhost:8080/api/user", true);
+  xhttp.setRequestHeader("Content-type", "application/json");
+  xhttp.send(obj);
+}
+
+function getUsers() {
+  var xhttp;
+  var userArray;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+
+   if (this.readyState == 4 && this.status == 200) {
+      userArray = JSON.parse(this.responseText);
+
+      var select = document.getElementById("currentUsersList")
+
+      for( var i=0; i< userArray.length; i++) {
+        var option = document.createElement("option");
+        option.value = userArray[i].id;
+        option.innerHTML = userArray[i].role;
+
+        select.appendChild(option);
+      }
+
+      var item = document.getElementById("availableUsers");
+      removeAllChildNodes(item);
+      item.appendChild(select);
+    }
+  };
+
+  xhttp.open("GET", "http://localhost:8080/api/user", true);
+  xhttp.send();
+}
+
+function onDelete() {
+}
+
+function editUser(newRole, id) {
+      var xhttp;
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        }
+      };
+
+      var obj = { "role" : newRole};
+      obj = JSON.stringify(obj);
+      xhttp.open("PUT", "http://localhost:8080/api/user/" + id, true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(obj);
+}
+
+function deleteUser() {
+      var xhttp;
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            getUsers();
+        }
+      };
+
+      xhttp.open("DELETE", "http://localhost:8080/api/user/" + id, true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send();
+}
+
+function removeAllChildNodes(element) {
+    while(element.firstChild) {
+        element.removeChild(element.lastChild);
+    }
+}
+
+function getUserById(id)
+{
+      var xhttp;
+      var user;
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            user = JSON.parse(this.responseText);
+        }
+      };
+
+      xhttp.open("GET", "http://localhost:8080/api/user/" + id, true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send();
+}
+
+function onSubmitEditForm() {
+   var select = document.getElementById("currentUsersList");
+   console.log()
+   var userId = select.options[select.selectedIndex].value;
+   var newRole = document.getElementById("newRole").value;
+   var currentRole = getUserById(userId);
+
+   editUser(newRole, userId);
+   getUsers();
+}
+
+//Time
+function startTime(fromSubmit) {
+
+  if(fromSubmit)
+  {
+      var calendar = document.getElementById("calendar").value;
+      date.setDate(calendar)
+      today.setHours(hours)
+      today.setMinutes(minutes);
+      today.setSeconds(seconds);
+  }
+
+  var month = today.getMonth();
+  var day = today.getDay();
+  var year = today.getYear();
+  var hour = today.getHours();
+  var minute = today.getMinutes();
+  var second = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('time').innerHTML =
+  day + month+ year+","+ hour + ":" + minute + ":" + second;
+  var t = setTimeout(startTime, 500);
+}
+
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+</script>
+</body>
 </html>

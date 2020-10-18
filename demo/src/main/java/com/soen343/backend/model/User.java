@@ -10,16 +10,16 @@ public class User {
     private final UUID id;
 
     @NotBlank
-    private final String name;
+    private final String role;
 
-    public String getName() {
-        return name;
+    public String getRole() {
+        return role;
     }
 
-    public User(@JsonProperty("id") UUID id, @JsonProperty("name") String name)
+    public User(@JsonProperty("id") UUID id, @JsonProperty("role") String role)
     {
         this.id = id;
-        this.name = name;
+        this.role = role;
     }
 
     public UUID getId() {
