@@ -363,20 +363,25 @@ function updateGameArea() {
 var loggedUserId;
 var date = new Date();
 
-function onClick(str) {
-  var xhttp;
-  xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        getUsers();
+function removeAllChildNodes(element) {
+    while(element.firstChild) {
+        element.removeChild(element.lastChild);
     }
-  };
+}
 
-  var obj = { "role" : str};
-  obj = JSON.stringify(obj);
-  xhttp.open("POST", "http://localhost:8080/api/user", true);
-  xhttp.setRequestHeader("Content-type", "application/json");
-  xhttp.send(obj);
+function getUserById(id) {
+      var xhttp;
+      var user;
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            user = JSON.parse(this.responseText);
+        }
+      };
+
+      xhttp.open("GET", "http://localhost:8080/api/user/" + id, true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send();
 }
 
 function getUsers() {
@@ -414,23 +419,23 @@ function onAddUserSubmit() {
 
   var select = document.getElementById("roleSelect");
   var role = select.options[select.selectedIndex].value;
-  onClick(role);
+  addUser(role);
 }
 
-function editUser(newRole, id) {
-      var xhttp;
-      xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            getUsers();
-        }
-      };
+function addUser(str) {
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        getUsers();
+    }
+  };
 
-      var obj = { "role" : newRole};
-      obj = JSON.stringify(obj);
-      xhttp.open("PUT", "http://localhost:8080/api/user/" + id, true);
-      xhttp.setRequestHeader("Content-type", "application/json");
-      xhttp.send(obj);
+  var obj = { "role" : str};
+  obj = JSON.stringify(obj);
+  xhttp.open("POST", "http://localhost:8080/api/user", true);
+  xhttp.setRequestHeader("Content-type", "application/json");
+  xhttp.send(obj);
 }
 
 function onSubmitDeleteUser()
@@ -438,7 +443,7 @@ function onSubmitDeleteUser()
    var select = document.getElementById("currentUsersList");
    var userId = select.options[select.selectedIndex].value;
 
-   deleteUser(id);
+   deleteUser(userId);
 }
 
 function deleteUser(id) {
@@ -455,27 +460,6 @@ function deleteUser(id) {
       xhttp.send();
 }
 
-function removeAllChildNodes(element) {
-    while(element.firstChild) {
-        element.removeChild(element.lastChild);
-    }
-}
-
-function getUserById(id) {
-      var xhttp;
-      var user;
-      xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            user = JSON.parse(this.responseText);
-        }
-      };
-
-      xhttp.open("GET", "http://localhost:8080/api/user/" + id, true);
-      xhttp.setRequestHeader("Content-type", "application/json");
-      xhttp.send();
-}
-
 function onSubmitEditForm() {
    var select = document.getElementById("currentUsersList");
    var userId = select.options[select.selectedIndex].value;
@@ -483,6 +467,22 @@ function onSubmitEditForm() {
    var currentRole = getUserById(userId);
 
    editUser(newRole, userId);
+}
+
+function editUser(newRole, id) {
+      var xhttp;
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            getUsers();
+        }
+      };
+
+      var obj = { "role" : newRole};
+      obj = JSON.stringify(obj);
+      xhttp.open("PUT", "http://localhost:8080/api/user/" + id, true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(obj);
 }
 
 //Time
