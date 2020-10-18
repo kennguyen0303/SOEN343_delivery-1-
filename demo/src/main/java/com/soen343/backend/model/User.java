@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 public class User {
 
     private final UUID id;
-    private boolean isLoggedUser = false;
+    private boolean isLoggedUser;
 
     @NotBlank
     private final String role;
@@ -16,6 +16,13 @@ public class User {
     public User(@JsonProperty("id") UUID id, @JsonProperty("role") String role) {
         this.id = id;
         this.role = role;
+        this.isLoggedUser = false;
+    }
+
+    public User(@JsonProperty("id") UUID id, @JsonProperty("role") String role, @JsonProperty("isLoggedIn") boolean isLoggedIn) {
+        this.id = id;
+        this.role = role;
+        this.isLoggedUser = isLoggedIn;
     }
 
     public String getRole() {

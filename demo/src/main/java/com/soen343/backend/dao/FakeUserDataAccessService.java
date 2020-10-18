@@ -59,4 +59,27 @@ public class FakeUserDataAccessService implements UserDAO {
                 })
                 .orElse(0);
     }
+
+    @Override
+    public int updateUserLoggedInById(UUID id, User updateUser) {
+
+        Optional<User> userProfile = selectUserById(id);
+        if(userProfile.isEmpty())
+        {
+            return 0; // indicates that no user was found and deleted
+        }
+        String previousRole = userProfile.get().getRole();
+
+        return selectUserById(id)
+                .map(user -> {
+                    int indexOfUserToUpdate = DB.lastIndexOf(user);
+                    if(indexOfUserToUpdate >= 0) // we have found a person
+                    {
+                        DB.set(indexOfUserToUpdate,  new User(id, previousRole, updateUser.getIsLoggedUser())); // set contents of the person to new person that was just received
+                        return 1;
+                    }
+                    return 0;
+                })
+                .orElse(0);
+    }
 }
