@@ -73,10 +73,11 @@
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
       var myObj = JSON.parse(this.responseText);
-      var temp = myObj.outside.temp;
-      }
+      temp=myObj.outside.temperature;
+      
       document.getElementById("temp").innerHTML = temp;
-    xmlhttp.open("GET", "layout.json", true);
+      }
+    xmlhttp.open("GET", "./protocol-loading-layout/layout.json", true);
     xmlhttp.send();
   </script>
 
