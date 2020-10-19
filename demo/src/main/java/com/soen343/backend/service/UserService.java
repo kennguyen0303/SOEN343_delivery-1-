@@ -46,4 +46,8 @@ public class UserService {
     public int loginUser(UUID id){
         return userDAO.loginUser(id);
     }
+
+    public int setUserLocation(UUID id, String location) {
+        return userDAO.setUserLocation(id, location);
+    }
 }

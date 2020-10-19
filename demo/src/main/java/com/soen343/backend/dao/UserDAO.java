@@ -24,4 +24,6 @@ public interface UserDAO {
     int updateUserById(UUID id, User user);
 
     int loginUser(UUID id);
+
+    int setUserLocation(UUID id, String location);
 }
