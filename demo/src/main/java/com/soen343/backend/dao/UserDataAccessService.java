@@ -8,17 +8,30 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * A Repository of the Users that are Registered to the Simulation and related business logic
+ */
 @Repository("userDao")
 public class UserDataAccessService implements UserDAO {
 
     private List<User> DB = new ArrayList<>();
 
+    /**
+     *
+     * @param id
+     * @param user
+     * @return
+     */
     @Override
     public int insertUser(UUID id, User user) {
         DB.add(new User(id, user.getRole()));
         return 1;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<User> selectAllUsers() {
 
         return DB;
@@ -31,7 +44,11 @@ public class UserDataAccessService implements UserDAO {
                 .findFirst();
     }
 
-
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public int deleteUserById(UUID id) {
         Optional<User> user = selectUserById(id);
@@ -45,6 +62,12 @@ public class UserDataAccessService implements UserDAO {
         return 1;
     }
 
+    /**
+     *
+     * @param id
+     * @param updateUser
+     * @return
+     */
     @Override
     public int updateUserById(UUID id, User updateUser) {
         return selectUserById(id)
@@ -60,6 +83,11 @@ public class UserDataAccessService implements UserDAO {
                 .orElse(0);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public int loginUser(UUID id) {
 
@@ -83,13 +111,22 @@ public class UserDataAccessService implements UserDAO {
         return 1;
     }
 
+    /**
+     *
+     * @return
+     */
     private Optional<User> findCurrentLoggedInUser() {
         return DB.stream()
                 .filter(user -> user.getIsLoggedUser() == true)
                 .findFirst();
     }
 
-
+    /**
+     *
+     * @param id
+     * @param location
+     * @return
+     */
     @Override
     public int setUserLocation(UUID id, String location) {
 
