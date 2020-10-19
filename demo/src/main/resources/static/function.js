@@ -328,3 +328,18 @@ function openForm() {
     document.getElementById("myForm").style.display = "none";
   }
 
+  function onCoordinatesSubmit() {
+    var x = document.getElementById('xAxis').value;
+    var y = document.getElementById('yAxis').value;
+
+    //validation
+    if (x < 0 || y < 0) {
+        alert("input error");
+    }
+    else {
+        var temp_door = new door(10, 10, "green", x, y, "horizontal");
+        temp_door.update();
+    }
+
+}
+
