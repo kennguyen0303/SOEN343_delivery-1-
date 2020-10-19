@@ -313,8 +313,3 @@ function updateGameArea() {
         a_door.update();
     });
 }
-
-//alex functions
-function showContext() {
-    document.getElementById('SHSystem').style.display = 'none';
-}
