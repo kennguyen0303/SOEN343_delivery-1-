@@ -26,7 +26,7 @@
               <!-- On/off switch-->
               <div class="row justify-content-center">
                 <label class="switch">
-                  <input type="checkbox" >
+                  <input type="checkbox" id="slider" >
                   <span class="slider round">ON</span>
                 </label>
               </div>
@@ -219,8 +219,9 @@ var myGameArea = {
         this.interval;
         updateGameArea();
         window.addEventListener('keydown', function (e) {
+            isOn=document.getElementById("slider").checked;
             myGameArea.key = e.keyCode;
-            this.interval = setInterval(updateGameArea, 20);
+            if(isOn) this.interval = setInterval(updateGameArea, 20);
         })
         window.addEventListener('keyup', function (e) {
             myGameArea.key = false;
