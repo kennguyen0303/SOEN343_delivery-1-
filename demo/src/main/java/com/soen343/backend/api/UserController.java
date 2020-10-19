@@ -50,4 +50,9 @@ public class UserController {
     public void loginUser(@PathVariable("id") UUID id) {
         userService.loginUser(id);
     }
+
+    @PutMapping(value = "api/user/updateUserLocation/{id}/{location}")
+    public void setUserLocation(@PathVariable("id") UUID id, @PathVariable("location") String location) {
+        userService.setUserLocation(id, location);
+    }
 }

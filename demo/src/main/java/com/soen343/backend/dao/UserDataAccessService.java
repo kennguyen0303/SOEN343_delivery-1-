@@ -88,4 +88,19 @@ public class UserDataAccessService implements UserDAO {
                 .filter(user -> user.getIsLoggedUser() == true)
                 .findFirst();
     }
+
+
+    @Override
+    public int setUserLocation(UUID id, String location) {
+
+        Optional<User> user = selectUserById(id);
+
+        if(user.isEmpty())
+        {
+            return 0; // indicates that no user was found and no action was taken
+        }
+
+        user.get().setLocation(location);
+        return 1;
+    }
 }
