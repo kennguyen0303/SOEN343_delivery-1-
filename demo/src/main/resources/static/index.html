@@ -131,7 +131,7 @@
                     <input type="reset" onclick="resetCoordinates()"><br>
                     <input type="submit" onclick="onCoordinatesSubmit()">
                 </div><br>
-                <button onclick="">BACK</button>
+                <button onclick="backToUserManagement()">BACK</button>
             </div><br>
 
             <div id="SHCore" class="tabcontent">
@@ -210,6 +210,7 @@
     <script>
         function showContext() {
             document.getElementById('SHSystem').style.display = "none";
+            document.getElementById('ContextOfSimulation').style.display = "block";
         }
 
         function onCoordinatesSubmit() {
@@ -230,6 +231,11 @@
         function resetCoordinates() {
             document.getElementById('xAxis').value = null;
             document.getElementById('yAxis').value = null;
+        }
+
+        function backToUserManagement() {
+            document.getElementById('SHSystem').style.display = "block";
+            document.getElementById('ContextOfSimulation').style.display = "none";
         }
     </script>
 
