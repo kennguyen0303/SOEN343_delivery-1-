@@ -88,6 +88,7 @@
                           <option value="Parent">Parent</option>
                           <option value="Child">Child</option>
                           <option value="Guest">Guest</option>
+                          <option value = "Stranger">Stranger</option>
                       </select>
                       <input type="button" onclick="onAddUserSubmit()" value="Add user">
                   </div>
@@ -102,8 +103,13 @@
                           <select id="currentUsersList"></select>
                       </div>
                       <br>
-                      <div>Enter a new role:
-                          <input type="text" id="newRole">
+                      <div>Select a new role for the user:
+                          <select id="newRole">
+                              <option value="Parent">Parent</option>
+                              <option value="Child">Child</option>
+                              <option value="Guest">Guest</option>
+                              <option value = "Stranger">Stranger</option>
+                          </select>
                       </div>
 
                       <br>
