@@ -36,7 +36,7 @@
 
                 <!-- edit icon-->
                 <div class="row justify-content-center">
-                    <a href="#"> <img src="edit.png" alt="edit" id="editIcon" onclick="showContext()"></a>
+                    <a href="#"> <img src="edit.png" alt="edit" id="editIcon" onclick="openForm()"></a>
                 </div>
                 <!-- /edit icon-->
 
@@ -119,10 +119,27 @@
                 </div>
                 <br>
             </div><br>
+            <!-- Alex form -->
+            <button class="open-button" onclick="openForm()">Open Form</button>
 
+            <div class="form-popup" id="myForm">
+            <form action="" class="form-container">
+                <h1>Add obstacle</h1>
+    
+                <label for="email"><b>X: </b></label>
+                <input type="number" id="xAxis" placeholder="Try 10" name="email" required>
+                <br>
+                <label for="psw"><b>Y: </b></label>
+                <input type="number" id="yAxis" placeholder="Try 10" name="psw" required>
+                <br>
+                <button type="button" class="btn" onclick="onCoordinatesSubmit()">Add obstacle</button>
+                <button type="button" class="btn" onclick="resetCoordinates()">Reset obstacle</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
+            </div>
             <div id="ContextOfSimulation" class="tabcontent">
                 <h2>Context of Simulation</h2>
-                <div id="PlaceObj">
+                <!-- <div id="PlaceObj">
                     <p>Please enter the coordiantes</p>
                     <label>X:</label>
                     <input type="number" id="xAxis"><br>
@@ -130,10 +147,10 @@
                     <input type="number" id="yAxis">
                     <input type="reset" onclick="resetCoordinates()"><br>
                     <input type="submit" onclick="onCoordinatesSubmit()">
-                </div><br>
+                </div><br> -->
                 <button onclick="">BACK</button>
             </div><br>
-
+            <!-- Alex form -->
             <div id="SHCore" class="tabcontent">
                 Smart Home Core Components
             </div>
@@ -181,6 +198,7 @@
         *Header 
         *@return a layout
         */
+        document.getElementById("defaultOpen").click(); //choose SHS on load
         var myGameArea = {
             canvas: document.getElementById("myCanvas"),
             start: function () {
@@ -222,6 +240,7 @@
             }
             else {
                 var temp_door = new door(10, 10, "green", x, y, "horizontal");
+                temp_door.update();
             }
 
         }

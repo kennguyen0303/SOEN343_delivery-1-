@@ -188,7 +188,6 @@ xhttp.send();
 function changeTabs(evt, SmartHomeTab) {
     // Declare all variables
     var i, tabcontent, tablinks;
-
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -318,3 +317,13 @@ function updateGameArea() {
 function showContext() {
     document.getElementById('SHSystem').style.display = 'none';
 }
+
+//************Function for Alex part prepared by Ken  */
+
+function openForm() {
+    document.getElementById("myForm").style.display = "block";
+  }
+  
+  function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+  }
