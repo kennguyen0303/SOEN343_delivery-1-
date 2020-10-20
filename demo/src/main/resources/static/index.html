@@ -160,8 +160,17 @@
 
         <div class="form-popup" id="myForm">
             <form action="" class="form-container">
+                <h2>Place users into rooms</h2>
+                <div id="availableUsers2">
+                    <select id="currentUsersList2"></select>
+                </div>
+                <select name="availableRooms" id="availableRooms">
+                    <option value="living_room">Living Room</option>
+                    <option value="kitchen">Kitchen</option>
+                    <option value="outdoor">Outdoor</option>
+                </select>
+                <button type="button" class="btn">Place</button>
                 <h2>Add obstacle</h2>
-                <select id="currentUsersList2"></select>
                 <div id="showCreatedUsers"></div>
                 <div id="addObstacles"></div>
                 <label for="email"><b>X: </b></label>
@@ -223,7 +232,7 @@
         }
     </script>
 
- 
+
 
 
 </body>

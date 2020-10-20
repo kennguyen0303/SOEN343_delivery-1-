@@ -55,151 +55,149 @@ xhttp.send();
 
 // Retrieves users from backend as they are added and displays them in a dropdown list
 function getUsers() {
-var xhttp;
-var userArray;
-xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
+    var xhttp;
+    var userArray;
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
 
-if (this.readyState == 4 && this.status == 200) {
-userArray = JSON.parse(this.responseText);
+        if (this.readyState == 4 && this.status == 200) {
+            userArray = JSON.parse(this.responseText);
 
-var select = document.getElementById("currentUsersList");
-removeAllChildNodes(select);
-//Ken attempt
-var select2 = document.getElementById("currentUsersList2");
-removeAllChildNodes(select2);
-//end
+            var select = document.getElementById("currentUsersList");
+            removeAllChildNodes(select);
+            //alex attempt
+            var select2 = document.getElementById("currentUsersList2");
+            removeAllChildNodes(select2);
+            //end
 
-for( var i=0; i< userArray.length; i++) {
-var option = document.createElement("option");
-option.value = userArray[i].id;
-option.innerHTML = userArray[i].role;
-select.appendChild(option);
-//Ken add
-var option2 = document.createElement("option");
-option2.value = userArray[i].id;
-option2.innerHTML = userArray[i].role;
-select2.appendChild(option2);
-//end
-}
+            for( var i=0; i< userArray.length; i++) {
+                var option = document.createElement("option");
+                option.value = userArray[i].id;
+                option.innerHTML = userArray[i].role;
+                select.appendChild(option);
+            }
 
-var item = document.getElementById("availableUsers");
+            //alex attempt
+            for( var i=0; i< userArray.length; i++) {
+                var option = document.createElement("option");
+                option.value = userArray[i].id;
+                option.innerHTML = userArray[i].role;
+                select2.appendChild(option);
+            }//end
 
-removeAllChildNodes(item);
-item.appendChild(select);
-//ken attempt start
-var item2 = document.getElementById("showCreatedUsers");
-removeAllChildNodes(item2);
-item2.appendChild(select2);
-//attempt end
-}
-};
+            var item = document.getElementById("availableUsers");
 
-xhttp.open("GET", "http://localhost:8080/api/user/allUserRetrieval", true);
-xhttp.send();
+            removeAllChildNodes(item);
+            item.appendChild(select);
+
+            //alex attempt start
+            var item2 = document.getElementById("availableUsers2");
+            removeAllChildNodes(item2);
+            item2.appendChild(select2);
+            //attempt end
+        }
+    };
+
+    xhttp.open("GET", "http://localhost:8080/api/user/allUserRetrieval", true);
+    xhttp.send();
 }
 
 // Submits the form to add a user
 function onAddUserSubmit() {
-
-var select = document.getElementById("roleSelect");
-var role = select.options[select.selectedIndex].value;
-addUser(role);
+    var select = document.getElementById("roleSelect");
+    var role = select.options[select.selectedIndex].value;
+    addUser(role);
 }
 
 // Sends the http request to add a user to the backend
 function addUser(str) {
-var xhttp;
-xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-if (this.readyState == 4 && this.status == 200) {
-getUsers();
-}
-};
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            getUsers();
+        }
+    };
 
-var obj = { "role" : str};
-obj = JSON.stringify(obj);
-xhttp.open("POST", "http://localhost:8080/api/user/addUser", true);
-xhttp.setRequestHeader("Content-type", "application/json");
-xhttp.send(obj);
+    var obj = { "role" : str};
+    obj = JSON.stringify(obj);
+    xhttp.open("POST", "http://localhost:8080/api/user/addUser", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(obj);
 }
 
 // Submits the user to delete
-function onSubmitDeleteUser()
-{
-var select = document.getElementById("currentUsersList");
-var userId = select.options[select.selectedIndex].value;
-
-deleteUser(userId);
+function onSubmitDeleteUser() {
+    var select = document.getElementById("currentUsersList");
+    var userId = select.options[select.selectedIndex].value;
+    deleteUser(userId);
 }
 
 // Sends the http request to delete a selected user
 function deleteUser(id) {
-var xhttp;
-xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-if (this.readyState == 4 && this.status == 200) {
-    getUsers();
-}
-};
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            getUsers();
+        }
+    };
 
-xhttp.open("DELETE", "http://localhost:8080/api/user/userRemoval/" + id, true);
-xhttp.setRequestHeader("Content-type", "application/json");
-xhttp.send();
+    xhttp.open("DELETE", "http://localhost:8080/api/user/userRemoval/" + id, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
 }
 
 // Submits the user to edit and the new role to change it with
 function onSubmitEditForm() {
-var select = document.getElementById("currentUsersList");
-var userId = select.options[select.selectedIndex].value;
-var newRoleSelect = document.getElementById("newRole")
-var newRole = newRoleSelect.options[newRoleSelect.selectedIndex].value;
-var currentRole = getUserById(userId);
+    var select = document.getElementById("currentUsersList");
+    var userId = select.options[select.selectedIndex].value;
+    var newRoleSelect = document.getElementById("newRole")
+    var newRole = newRoleSelect.options[newRoleSelect.selectedIndex].value;
+    var currentRole = getUserById(userId);
 
-editUser(newRole, userId);
+    editUser(newRole, userId);
 }
 
 // sends the http request to edit a user role in the backend
 function editUser(newRole, id) {
-var xhttp;
-xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-if (this.readyState == 4 && this.status == 200) {
-    getUsers();
-}
-};
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            getUsers();
+        }
+    };
 
-var obj = { "role" : newRole};
-obj = JSON.stringify(obj);
-xhttp.open("PUT", "http://localhost:8080/api/user/userUpdate/" + id, true);
-xhttp.setRequestHeader("Content-type", "application/json");
-xhttp.send(obj);
+    var obj = { "role" : newRole};
+    obj = JSON.stringify(obj);
+    xhttp.open("PUT", "http://localhost:8080/api/user/userUpdate/" + id, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(obj);
 }
 
 // Logs in the selected user and logs out old user, if necessary
-function onLoginSubmit()
-{
-var select = document.getElementById("currentUsersList");
-var userId = select.options[select.selectedIndex].value;
-var role = select.options[select.selectedIndex].innerHTML;
+function onLoginSubmit() {
+    var select = document.getElementById("currentUsersList");
+    var userId = select.options[select.selectedIndex].value;
+    var role = select.options[select.selectedIndex].innerHTML;
 
-logIn(userId,role);
+    logIn(userId,role);
 }
 
 // Performs the http request to log in the user
-function logIn(id, role)
-{
-var xhttp;
-xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-if (this.readyState == 4 && this.status == 200) {
-    document.getElementById("userDisplay").innerHTML = role ;
-}
-};
+function logIn(id, role) {
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("userDisplay").innerHTML = role ;
+        }
+    };
 
-xhttp.open("PUT", "http://localhost:8080/api/user/logIn/" + id, true);
-xhttp.setRequestHeader("Content-type", "application/json");
-xhttp.send();
+    xhttp.open("PUT", "http://localhost:8080/api/user/logIn/" + id, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
 }
 
 //Nathan+Abdala function
@@ -381,7 +379,7 @@ function openForm() {
     else {
         //add human/image: choose the last parameter as image
         //add obstacle: "put sthing else"
-        obstacle = new door(30, 40, "green", xAxis, yAxis, "image");
+        obstacle = new door(10, 10, "green", xAxis, yAxis, "horizontal");
         obstacle.update();
     }
 
