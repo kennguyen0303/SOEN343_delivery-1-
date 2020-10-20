@@ -62,14 +62,47 @@
       </div>
       <!-- /Location-->
 
-      <!--Temperature -->
-      <div class="row justify-content-center" style="font-weight:700;">
-        Outside Temp. 15 &#730;C
-      </div>
-      <!--/Temperature -->
 
-    </fieldset>
-  </div>
-</body>
+        <div class="row justify-content-center" id="time" style="font-weight:700;">
+         
+        </div>
 
+        <script>
+			function startTime() {
+				var month = new Array();
+				month[0] = "January";
+				month[1] = "February";
+				month[2] = "March";
+				month[3] = "April";
+				month[4] = "May";
+				month[5] = "June";
+				month[6] = "July";
+				month[7] = "August";
+				month[8] = "September";
+				month[9] = "October";
+				month[10] = "November";
+				month[11] = "December";
+			  var today = new Date();
+			  var h = today.getHours();
+			  var m = today.getMinutes();
+			  var s = today.getSeconds();
+			  var d = today.getDate();
+			  var mon = month[today.getMonth()];
+			  m = checkTime(m);
+			  s = checkTime(s);
+			  document.getElementById('time').innerHTML =
+			  mon + "," + d + "," + h + ":" + m + ":" + s;
+			  var t = setTimeout(startTime, 500);
+			  console.log(mon + "," + d + "," + h + ":" + m + ":" + s)
+			}
+			function checkTime(i) {
+			  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+			  return i;
+			}
+		</script>
+
+      </fieldset>
+    </div>
+  </body>
 </html>
+
