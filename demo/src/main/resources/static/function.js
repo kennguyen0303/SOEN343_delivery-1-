@@ -449,6 +449,12 @@ function startTime() {
 	document.getElementById('time').innerHTML = today.toLocaleString("en-US");
 }
 
+function refreshTime() {
+    setInterval(() => {
+        startTime();
+    }, 1000);
+}
+
 function newTime(){
 	var y = prompt("enter a year (October 13, 2014 11:13:00)", 0);
 	var day = new Date(y);
