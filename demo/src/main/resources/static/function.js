@@ -444,20 +444,26 @@ function placeUser(){
     selectedUser.update();
 }
 
-function startTime() {
-	var today = new Date();
-	document.getElementById('time').innerHTML = today.toLocaleString("en-US");
-}
+var currentTime = new Date();
+// function startTime() {
+// 	currentTime = new Date();
+// }
 
 function refreshTime() {
+    // currentTime = new Date();
     setInterval(() => {
-        startTime();
+        //currentTime + 1
+        tikTok();
     }, 1000);
 }
 
-function newTime(){
+function newTime() {
 	var y = prompt("enter a year (October 13, 2014 11:13:00)", 0);
-	var day = new Date(y);
-	document.getElementById('time').innerHTML = day.toLocaleString("en-US");
+	currentTime = new Date(y);
 }
 
+function tikTok() {
+    var second = currentTime.getSeconds() + 1;
+    currentTime.setSeconds(second);
+    document.getElementById('time').innerHTML = currentTime.toLocaleString("en-US");
+}
