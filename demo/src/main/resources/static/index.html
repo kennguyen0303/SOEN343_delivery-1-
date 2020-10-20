@@ -162,8 +162,19 @@
 
         <div class="form-popup" id="myForm">
             <form action="" class="form-container">
-                <h1>Add obstacle</h1>
+                <h2>Place users into rooms</h2>
+                <div id="availableUsers2">
+                    <select id="currentUsersList2"></select>
+                </div>
+                <select name="availableRooms" id="availableRooms">
+                    <option value="living_room">Living Room</option>
+                    <option value="kitchen">Kitchen</option>
+                    <option value="outdoor">Outdoor</option>
+                </select>
+                <button type="button" class="btn" onclick="placeUser()">Place</button>
+                <h2>Add obstacle</h2>
                 <div id="showCreatedUsers"></div>
+                <div id="addObstacles"></div>
                 <label for="email"><b>X: </b></label>
                 <input type="number" id="xAxis" placeholder="Try 10" name="email" required>
                 <br>
@@ -172,7 +183,7 @@
                 <br>
                 <button type="button" class="btn" onclick="onCoordinatesSubmit()">Add obstacle</button>
                 <button type="button" class="btn" onclick="resetCoordinates()">Reset obstacle</button>
-                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Hide</button>
             </form>
         </div>
         <!-- Popup form -->
@@ -210,20 +221,10 @@
                 });
             }
         }
-        function resetCoordinates() {
-            document.getElementById('xAxis').value = null;
-            document.getElementById('yAxis').value = null;
-            //the following code does not work for now
-            xAxis = 0;
-            yAxis = 0;
-            obstacle.width = 0;
-            obstacle.height = 0;
-            obstacle.update();
-            renderLayout();
-        }
+
     </script>
 
- 
+
 
 
 </body>
