@@ -169,7 +169,7 @@
                     <option value="kitchen">Kitchen</option>
                     <option value="outdoor">Outdoor</option>
                 </select>
-                <button type="button" class="btn">Place</button>
+                <button type="button" class="btn" onclick="placeUser()">Place</button>
                 <h2>Add obstacle</h2>
                 <div id="showCreatedUsers"></div>
                 <div id="addObstacles"></div>
@@ -219,17 +219,7 @@
                 });
             }
         }
-        function resetCoordinates() {
-            document.getElementById('xAxis').value = null;
-            document.getElementById('yAxis').value = null;
-            //the following code does not work for now
-            xAxis = 0;
-            yAxis = 0;
-            obstacle.width = 0;
-            obstacle.height = 0;
-            obstacle.update();
-            renderLayout();
-        }
+
     </script>
 
 

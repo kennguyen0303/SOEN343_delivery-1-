@@ -402,3 +402,43 @@ function openForm() {
 
 }
 
+function resetCoordinates() {
+    document.getElementById('xAxis').value = null;
+    document.getElementById('yAxis').value = null;
+    //the following code does not work for now
+    xAxis = 0;
+    yAxis = 0;
+    obstacle.width = 0;
+    obstacle.height = 0;
+    obstacle.update();
+    renderLayout();
+}
+
+function placeUser(){
+    //obtain the user
+    var userIndex = document.getElementById('currentUsersList2').selectedIndex;
+    var userName = document.getElementById('currentUsersList2').options[userIndex].text;
+    
+    //obtain the room
+    var roomName = document.getElementById('availableRooms').value;
+
+    //determine the coordinates of the user for each room
+    var positionX = 0;
+    var positionY = 0
+    if(roomName == "living_room") {
+        positionX = 35;
+        positionY = 75;
+    } 
+    if(roomName == "kitchen") {
+        positionX = 185;
+        positionY = 75;
+    }
+    if(roomName == "outdoor") {
+        positionX = 385;
+        positionY = 225;
+    }
+
+    //place img in the layout
+    var selectedUser = new door(30, 50, "", positionX, positionY, "image")
+    selectedUser.update();
+}
