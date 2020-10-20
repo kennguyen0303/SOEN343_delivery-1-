@@ -32,10 +32,6 @@ xhttp.send();
 
 }
 
-
-var loggedUserId;
-var date = new Date();
-
 function removeAllChildNodes(element) {
 while(element.firstChild) {
 element.removeChild(element.lastChild);
@@ -57,6 +53,7 @@ xhttp.setRequestHeader("Content-type", "application/json");
 xhttp.send();
 }
 
+// Retrieves users from backend as they are added and displays them in a dropdown list
 function getUsers() {
 var xhttp;
 var userArray;
@@ -88,6 +85,7 @@ xhttp.open("GET", "http://localhost:8080/api/user/allUserRetrieval", true);
 xhttp.send();
 }
 
+// Submits the form to add a user
 function onAddUserSubmit() {
 
 var select = document.getElementById("roleSelect");
@@ -95,6 +93,7 @@ var role = select.options[select.selectedIndex].value;
 addUser(role);
 }
 
+// Sends the http request to add a user to the backend
 function addUser(str) {
 var xhttp;
 xhttp = new XMLHttpRequest();
@@ -111,6 +110,7 @@ xhttp.setRequestHeader("Content-type", "application/json");
 xhttp.send(obj);
 }
 
+// Submits the user to delete
 function onSubmitDeleteUser()
 {
 var select = document.getElementById("currentUsersList");
@@ -119,6 +119,7 @@ var userId = select.options[select.selectedIndex].value;
 deleteUser(userId);
 }
 
+// Sends the http request to delete a selected user
 function deleteUser(id) {
 var xhttp;
 xhttp = new XMLHttpRequest();
@@ -133,15 +134,18 @@ xhttp.setRequestHeader("Content-type", "application/json");
 xhttp.send();
 }
 
+// Submits the user to edit and the new role to change it with
 function onSubmitEditForm() {
 var select = document.getElementById("currentUsersList");
 var userId = select.options[select.selectedIndex].value;
-var newRole = document.getElementById("newRole").value;
+var newRoleSelect = document.getElementById("newRole")
+var newRole = newRoleSelect.options[newRoleSelect.selectedIndex].value;
 var currentRole = getUserById(userId);
 
 editUser(newRole, userId);
 }
 
+// sends the http request to edit a user role in the backend
 function editUser(newRole, id) {
 var xhttp;
 xhttp = new XMLHttpRequest();
@@ -158,6 +162,7 @@ xhttp.setRequestHeader("Content-type", "application/json");
 xhttp.send(obj);
 }
 
+// Logs in the selected user and logs out old user, if necessary
 function onLoginSubmit()
 {
 var select = document.getElementById("currentUsersList");
@@ -167,6 +172,7 @@ var role = select.options[select.selectedIndex].innerHTML;
 logIn(userId,role);
 }
 
+// Performs the http request to log in the user
 function logIn(id, role)
 {
 var xhttp;
