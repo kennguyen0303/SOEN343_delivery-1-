@@ -374,5 +374,10 @@ function openForm() {
 function startTime() {
 	var today = new Date();
 	document.getElementById('time').innerHTML = today.toLocaleString("en-US");
-	var t = setTimeout(startTime, 500);
+}
+
+function newTime(){
+	var y = prompt("enter a year (October 13, 2014 11:13:00)", 0);
+	var day = new Date(y);
+	document.getElementById('time').innerHTML = day.toLocaleString("en-US");
 }
