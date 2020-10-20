@@ -384,19 +384,19 @@ function openForm() {
     }
 
     //block the door1
-    if(xAxis>40 && xAxis<50 && yAxis>192 && yAxis<207) {
+    if(xAxis>40 && xAxis<60 && yAxis>192 && yAxis<207) {
         //change the boundary of door1
         door_array[0].boundary = [door_array[0].x, xAxis-20];
     }
-    if(xAxis>133 && xAxis<148 && yAxis>40 && yAxis<50){
+    if(xAxis>133 && xAxis<148 && yAxis>40 && yAxis<60){
         //change the boundary of door2
         door_array[1].boundary = [door_array[1].y, yAxis-20];
 
     }
-    if(xAxis>283 && xAxis<298 && yAxis>80 && yAxis<90) {
+    if(xAxis>283 && xAxis<298 && yAxis>80 && yAxis<100) {
         door_array[2].boundary = [door_array[2].y, yAxis-20];
     }
-    if(xAxis>283 && xAxis<298 && yAxis>280 && yAxis<290) {
+    if(xAxis>283 && xAxis<298 && yAxis>280 && yAxis<300) {
         door_array[3].boundary = [door_array[3].y, yAxis-20];
     }
 
