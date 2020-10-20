@@ -345,6 +345,10 @@ function openForm() {
     //validation
     if (xAxis < 0 || yAxis < 0) {
         alert("input error");
+        xAxis = 0;
+        yAxis = 0;
+        document.getElementById('xAxis').value = null;
+        document.getElementById('yAxis').value = null;
     }
     else {
         obstacle = new door(10, 10, "green", xAxis, yAxis, "horizontal");
