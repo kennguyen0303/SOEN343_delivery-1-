@@ -126,8 +126,8 @@ input:checked + .slider:before {
   padding: 10px;
 }
 
-.layout-container > div {
-}
+/* .layout-container > div {
+} */
 
 .sidebar{
   grid-row-start: 1;
@@ -202,9 +202,12 @@ input:checked + .slider:before {
 
 /* Add styles to the form container */
 .form-container {
-  max-width: 300px;
+  max-width: 700px;
   padding: 10px;
   background-color: white;
+  width:700px;
+  height: 400px;
+  max-height: 700px;
 }
 
 /* Full-width input fields */

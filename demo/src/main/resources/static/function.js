@@ -72,6 +72,7 @@ option.value = userArray[i].id;
 option.innerHTML = userArray[i].role;
 
 select.appendChild(option);
+
 }
 
 var item = document.getElementById("availableUsers");
