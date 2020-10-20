@@ -72,6 +72,7 @@ option.value = userArray[i].id;
 option.innerHTML = userArray[i].role;
 
 select.appendChild(option);
+
 }
 
 var item = document.getElementById("availableUsers");
@@ -194,7 +195,6 @@ xhttp.send();
 function changeTabs(evt, SmartHomeTab) {
     // Declare all variables
     var i, tabcontent, tablinks;
-
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -319,3 +319,54 @@ function updateGameArea() {
         a_door.update();
     });
 }
+
+//alex functions
+function showContext() {
+    document.getElementById('SHSystem').style.display = 'none';
+}
+
+//************Function for Alex part prepared by Ken  */
+
+function openForm() {
+    document.getElementById("myForm").style.display = "block";
+  }
+  
+  function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+  }
+
+  var xAxis = 0;
+  var yAxis = 0;
+  var obstacle = null;
+  function onCoordinatesSubmit() {
+    xAxis = document.getElementById('xAxis').value;
+    yAxis = document.getElementById('yAxis').value;
+
+    //validation
+    if (xAxis < 0 || yAxis < 0) {
+        alert("input error");
+    }
+    else {
+        obstacle = new door(10, 10, "green", xAxis, yAxis, "horizontal");
+        obstacle.update();
+    }
+
+    //block the door1
+    if(xAxis>40 && xAxis<50 && yAxis>192 && yAxis<207) {
+        //change the boundary of door1
+        door_array[0].boundary = [door_array[0].x, xAxis-20];
+    }
+    if(xAxis>133 && xAxis<148 && yAxis>40 && yAxis<50){
+        //change the boundary of door2
+        door_array[1].boundary = [door_array[1].y, yAxis-20];
+
+    }
+    if(xAxis>283 && xAxis<298 && yAxis>80 && yAxis<90) {
+        door_array[2].boundary = [door_array[2].y, yAxis-20];
+    }
+    if(xAxis>283 && xAxis<298 && yAxis>280 && yAxis<290) {
+        door_array[3].boundary = [door_array[3].y, yAxis-20];
+    }
+
+}
+
