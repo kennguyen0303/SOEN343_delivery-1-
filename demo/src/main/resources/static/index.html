@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -12,62 +13,63 @@
     <title>Smart Home Simulator</title>
     <!-- Custom styles for this template -->
     <link href="style.css" rel="stylesheet">
-  </head>
+</head>
 
-  <header>
+<header>
 
-  </header>
+</header>
 
-  <body>
+<body>
     <div class="layout-container">
         <div class="sidebar">
             <fieldset id="simulationTab">
-              <legend id="simlegend">Simulation</legend>
-      
-              <!-- On/off switch-->
-              <div class="row justify-content-center">
-                <label class="switch">
-                  <input type="checkbox" id="slider" >
-                  <span class="slider round">ON</span>
-                </label>
-              </div>
-              <!-- /On/off switch-->
-      
-              <!-- edit icon-->
-              <div class="row justify-content-center">
-                <a href="#"> <img src="edit.png" alt="edit" id="editIcon"></a>
-              </div>
-              <!-- /edit icon-->
-      
-              <!-- Profile picture-->
-              <div class="row justify-content-center" id="profilePic">
-      
-              </div>
-              <!-- /Profile picture-->
-      
-              <!-- User-->
-              <div class="row justify-content-center">
-                  <a href="#" style="text-decoration:underline;" id="userDisplay">No user logged in</a>
-              </div>
-              <!-- /User-->
-      
-              <!-- Location-->
-              <div class="row justify-content-center" style="font-weight:600;">
-                Location:
-              </div>
-      
-              <div class="row justify-content-center">
-                <a href="#" style="text-decoration:underline;">Kitchen</a>
-              </div>
-              <!-- /Location-->
-      
-              <!--Temperature -->
-              <div class="row justify-content-center" style="font-weight:700;">
-                Outside Temp. 15 &#730;C
-              </div>
-              <!--/Temperature -->
-      
+                <legend id="simlegend">Simulation</legend>
+
+                <!-- On/off switch-->
+                <div class="row justify-content-center">
+                    <label class="switch">
+                        <input type="checkbox" id="slider">
+                        <span class="slider round">ON</span>
+                    </label>
+                </div>
+                <!-- /On/off switch-->
+
+                <!-- edit icon-->
+                <div class="row justify-content-center">
+                    <a href="#"> <img src="edit.png" alt="edit" id="editIcon" onclick="openForm()"></a>
+                </div>
+                <!-- /edit icon-->
+
+                <!-- Profile picture-->
+                <div class="row justify-content-center" id="profilePic">
+
+                </div>
+                <!-- /Profile picture-->
+
+                <!-- User-->
+                <div class="row justify-content-center">
+                    <a href="#" style="text-decoration:underline;" id="userDisplay">No user logged in</a>
+                </div>
+                <!-- /User-->
+
+                <!-- Location-->
+                <div class="row justify-content-center" style="font-weight:600;">
+                    Location:
+                </div>
+
+                <div class="row justify-content-center">
+                    <a href="#" style="text-decoration:underline;">Kitchen</a>
+                </div>
+                <!-- /Location-->
+
+                <!--Temperature -->
+                <div class="row justify-content-center" style="font-weight:700;">
+                    Outside Temp. 15 &#730;C
+                </div>
+                <!--/Temperature -->
+
             </fieldset>
+
           </div>
           <div class="tab-items">
               <div class="tabs">
@@ -155,49 +157,66 @@
              <h4>Use arrow button to move </h4>
           </div>
           <div class = "console">Console Here</div>
+=======
+        
     </div>
-<!--    <div class="Daniela-test">-->
-<!--        <form action="">-->
-<!--            <select name="roles" onchange="addProfile(this.value)">-->
-<!--                <option value="Parent">Parent</option>-->
-<!--                <option value="Child">Child</option>-->
-<!--                <option value="Guest">Guest</option>-->
-<!--                <submit>Submit</submit>-->
-<!--            </select>-->
-<!--        </form>-->
-<!--        <button onclick="getProfile()">Click to get the profiles</button>-->
-<!--        <div id="showProfile"></div>-->
-<!--    </div>-->
-  <script>
-    /**
-    *Header 
-    *@return a layout
-    */
-    var myGameArea = {
-    canvas : document.getElementById("myCanvas"),
-    start : function() {
-        this.context = this.canvas.getContext("2d");
-        this.interval;
-        updateGameArea();
-        window.addEventListener('keydown', function (e) {
-            isOn=document.getElementById("slider").checked;
-            myGameArea.key = e.keyCode;
-            if(isOn) this.interval = setInterval(updateGameArea, 20);
-        })
-        window.addEventListener('keyup', function (e) {
-            myGameArea.key = false;
-            clearInterval(this.interval);//let's try
-        })
-    }, 
-    clear : function(){
-        door_array.forEach(a_door => {
-            if(a_door.move_mode=="horizontal") this.context.clearRect((a_door.x-40), a_door.y, 60, 5);
-            if(a_door.move_mode=="vertical") this.context.clearRect(a_door.x, (a_door.y-40), 5, 60);
-        });
-    }
-}
+    <!--    <div class="Daniela-test">-->
+    <!--        <form action="">-->
+    <!--            <select name="roles" onchange="addProfile(this.value)">-->
+    <!--                <option value="Parent">Parent</option>-->
+    <!--                <option value="Child">Child</option>-->
+    <!--                <option value="Guest">Guest</option>-->
+    <!--                <submit>Submit</submit>-->
+    <!--            </select>-->
+    <!--        </form>-->
+    <!--        <button onclick="getProfile()">Click to get the profiles</button>-->
+    <!--        <div id="showProfile"></div>-->
+    <!--    </div>-->
+    <script>
+        /**
+        *Header 
+        *@return a layout
+        */
+        document.getElementById("defaultOpen").click(); //choose SHS on load
+        var myGameArea = {
+            canvas: document.getElementById("myCanvas"),
+            start: function () {
+                this.context = this.canvas.getContext("2d");
+                this.interval;
+                updateGameArea();
+                window.addEventListener('keydown', function (e) {
+                    isOn = document.getElementById("slider").checked;
+                    myGameArea.key = e.keyCode;
+                    if (isOn) this.interval = setInterval(updateGameArea, 20);
+                })
+                window.addEventListener('keyup', function (e) {
+                    myGameArea.key = false;
+                    clearInterval(this.interval);//let's try
+                })
+            },
+            clear: function () {
+                door_array.forEach(a_door => {
+                    if (a_door.move_mode == "horizontal") this.context.clearRect((a_door.x - 40), a_door.y, 60, 5);
+                    if (a_door.move_mode == "vertical") this.context.clearRect(a_door.x, (a_door.y - 40), 5, 60);
+                });
+            }
+        }
     </script>
-   
-   
+
+    <!-- ADD function work now -->
+    <script>
+        function showContext() {
+            document.getElementById('SHSystem').style.display = "none";
+        }
+
+        
+
+        function resetCoordinates() {
+            document.getElementById('xAxis').value = null;
+            document.getElementById('yAxis').value = null;
+        }
+    </script>
+
 </body>
+
 </html>

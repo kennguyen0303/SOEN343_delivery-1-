@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title></title>
 </head>
+
 <body>
 	<div>
 		<div class="tabs">
@@ -14,6 +16,41 @@
 
 		<div id="SHSystem" class="tabcontent">
 			Smart Home System Components
+			<br><br><br>
+			<form id="editForm" style="display: none;">
+				<fieldset>
+					<legend>
+						<h3>Place a memeber to a certain room</h3>
+					</legend>
+					<select id="whichMember" name="member">
+						<option value="father">Father</option>
+						<option value="mother">Mother</option>
+						<option value="children">Children</option>
+						<option value="guest">Guest</option>
+						<option value="stranger">Stranger</option>
+					</select>
+					<select id="whichRoom" name="room">
+						<option value="living_room">Living Room</option>
+						<option value="kitchen">Kitchen</option>
+						<option value="outside">Outside</option>
+					</select>
+					<input type="reset"><br>
+					<input name="setMember" type="submit" onclick="submitMemberLocation()">
+				</fieldset><br>
+
+				<fieldset>
+					<legend>
+						<h3>put an arbitary object</h3>
+					</legend>
+					<label>Please enter the axis of the object</label><br>
+					<label>X</label>
+					<input id="xaxis" type="number" name="xaxis"><br>
+					<label>Y</label>
+					<input id="yaxis" type="number" name="yaxis">
+					<input type="reset"><br>
+					<input name="setObject" type="submit" onclick="submitObjectLocation()">
+				</fieldset>
+			</form>
 		</div>
 
 		<div id="SHCore" class="tabcontent">
@@ -41,13 +78,13 @@
 			// Get all elements with class="tabcontent" and hide them
 			tabcontent = document.getElementsByClassName("tabcontent");
 			for (i = 0; i < tabcontent.length; i++) {
-			  tabcontent[i].style.display = "none";
+				tabcontent[i].style.display = "none";
 			}
 
 			// Get all elements with class="tablinks" and remove the class "active"
 			tablinks = document.getElementsByClassName("tablinks");
 			for (i = 0; i < tablinks.length; i++) {
-			  tablinks[i].className = tablinks[i].className.replace(" active", "");
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
 			}
 
 			// Show the current tab, and add an "active" class to the button that opened the tab
@@ -56,4 +93,5 @@
 		}
 	</script>
 </body>
+
 </html>

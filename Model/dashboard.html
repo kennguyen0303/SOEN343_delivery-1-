@@ -1,72 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <title>Smart Home Simulator</title>
-    <!-- Custom styles for this template -->
-    <link href="style.css" rel="stylesheet">
-  </head>
 
-  <header>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="dashboard.js"></script>
+  <title>Smart Home Simulator</title>
+  <!-- Custom styles for this template -->
+  <link href="style.css" rel="stylesheet">
+</head>
 
-  </header>
+<header>
 
-  <body>
-    <div class="container">
+</header>
 
-      <fieldset id="simulationTab">
-        <legend id="simlegend">Simulation</legend>
+<body>
+  <div class="container">
 
-        <!-- On/off switch-->
-        <div class="row justify-content-center">
-          <label class="switch">
-            <input type="checkbox" >
-            <span class="slider round">ON</span>
-          </label>
-        </div>
-        <!-- /On/off switch-->
+    <fieldset id="simulationTab">
+      <legend id="simlegend">Simulation</legend>
 
-        <!-- edit icon-->
-        <div class="row justify-content-center">
-          <a href="#"> <img src="edit.png" alt="edit" id="editIcon"></a>
-        </div>
-        <!-- /edit icon-->
+      <!-- On/off switch-->
+      <div class="row justify-content-center">
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round">ON</span>
+        </label>
+      </div>
+      <!-- /On/off switch-->
 
-        <!-- Profile picture-->
-        <div class="row justify-content-center" id="profilePic">
+      <!-- edit icon-->
+      <div class="row justify-content-center">
+        <a href="#"> <img src="edit.png" alt="edit" id="editIcon" onclick="displayForms()"></a>
+      </div>
+      <!-- /edit icon-->
 
-        </div>
-        <!-- /Profile picture-->
+      <!-- Profile picture-->
+      <div class="row justify-content-center" id="profilePic">
 
-        <!-- User-->
-        <div class="row justify-content-center">
-            <a href="#" style="text-decoration:underline;" >Parent</a>
-        </div>
-        <!-- /User-->
+      </div>
+      <!-- /Profile picture-->
 
-        <!-- Location-->
-        <div class="row justify-content-center" style="font-weight:600;">
-          Location:
-        </div>
+      <!-- User-->
+      <div class="row justify-content-center">
+        <a href="#" style="text-decoration:underline;">Parent</a>
+      </div>
+      <!-- /User-->
 
-        <div class="row justify-content-center">
-          <a href="#" style="text-decoration:underline;">Kitchen</a>
-        </div>
-        <!-- /Location-->
+      <!-- Location-->
+      <div class="row justify-content-center" style="font-weight:600;">
+        Location:
+      </div>
 
-        <!--Temperature -->
-        <div class="row justify-content-center" style="font-weight:700;">
-          Outside Temp. 15 &#730;C
-        </div>
-        <!--/Temperature -->
+      <div class="row justify-content-center">
+        <a href="#" style="text-decoration:underline;">Kitchen</a>
+      </div>
+      <!-- /Location-->
 
-      </fieldset>
-    </div>
-  </body>
+      <!--Temperature -->
+      <div class="row justify-content-center" style="font-weight:700;">
+        Outside Temp. 15 &#730;C
+      </div>
+      <!--/Temperature -->
+
+    </fieldset>
+  </div>
+</body>
+
 </html>
