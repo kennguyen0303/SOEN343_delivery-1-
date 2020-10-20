@@ -63,22 +63,35 @@ xhttp.onreadystatechange = function() {
 if (this.readyState == 4 && this.status == 200) {
 userArray = JSON.parse(this.responseText);
 
-var select = document.getElementById("currentUsersList")
+var select = document.getElementById("currentUsersList");
 removeAllChildNodes(select);
+//Ken attempt
+var select2 = document.getElementById("currentUsersList2");
+removeAllChildNodes(select2);
+//end
 
 for( var i=0; i< userArray.length; i++) {
 var option = document.createElement("option");
 option.value = userArray[i].id;
 option.innerHTML = userArray[i].role;
-
 select.appendChild(option);
-
+//Ken add
+var option2 = document.createElement("option");
+option2.value = userArray[i].id;
+option2.innerHTML = userArray[i].role;
+select2.appendChild(option2);
+//end
 }
 
 var item = document.getElementById("availableUsers");
 
 removeAllChildNodes(item);
 item.appendChild(select);
+//ken attempt start
+var item2 = document.getElementById("showCreatedUsers");
+removeAllChildNodes(item2);
+item2.appendChild(select2);
+//attempt end
 }
 };
 
@@ -261,7 +274,7 @@ function startGame() {
 
 
 //a constructor
-function door(width, height, color, x, y,move_mode) {
+function door(width, height, color, x, y,move_mode) {//in case of human-stick, color=name
     this.gamearea = document.getElementById("myCanvas");
     this.move_mode=move_mode;
     this.width = width;
@@ -270,6 +283,11 @@ function door(width, height, color, x, y,move_mode) {
     this.speedY = 0;    
     this.x = x;
     this.y = y;
+    if (move_mode == "image") {
+        this.image = new Image();
+        this.image.src = "human_stick.png";
+        this.name=color;//set the name
+    }
     if(this.move_mode=="horizontal"){//make a boundary for movement
         this.boundary=[this.x,(this.x+this.width)];//inital point + width
     }
@@ -277,9 +295,19 @@ function door(width, height, color, x, y,move_mode) {
         this.boundary=[this.y,(this.y+this.height)]
     }        
     this.update = function() {
-        ctx = this.gamearea.getContext("2d")
-        ctx.fillStyle = color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx = myGameArea.canvas.getContext("2d");
+        if (move_mode == "image") {
+            //display the human stick
+            ctx.drawImage(this.image, 
+                this.x, 
+                this.y,
+                this.width, this.height);
+            //display the name or role
+            ctx.fillText(color,this.x+15,this.y+50);//format: [0]=room name, [1]: width, [2]: height
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
     }
     this.newPos = function() {
         this.x += this.speedX;
@@ -347,7 +375,9 @@ function openForm() {
         alert("input error");
     }
     else {
-        obstacle = new door(10, 10, "green", xAxis, yAxis, "horizontal");
+        //add human/image: choose the last parameter as image
+        //add obstacle: "put sthing else"
+        obstacle = new door(30, 40, "green", xAxis, yAxis, "image");
         obstacle.update();
     }
 
