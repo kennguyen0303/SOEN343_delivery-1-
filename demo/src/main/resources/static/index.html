@@ -70,96 +70,95 @@
 
             </fieldset>
 
-          </div>
-          <div class="tab-items">
-              <div class="tabs">
-                  <button class="tabLink" onclick="changeTabs(event, 'SHSystem')" id="defaultOpen">SHS</button>
-                  <button class="tabLink" onclick="changeTabs(event, 'SHCore')">SHC</button>
-                  <button class="tabLink" onclick="changeTabs(event, 'SHProtection')">SHP</button>
-                  <button class="tabLink" onclick="changeTabs(event, 'SHHeating')">SHH</button>
-              </div>
-      
-              <div id="SHSystem" class="tabcontent">
-                  Smart Home System Components
-                  <h2>User Management</h2>
+        </div>
+        <div class="tab-items">
+            <div class="tabs">
+                <button class="tabLink" onclick="changeTabs(event, 'SHSystem')" id="defaultOpen">SHS</button>
+                <button class="tabLink" onclick="changeTabs(event, 'SHCore')">SHC</button>
+                <button class="tabLink" onclick="changeTabs(event, 'SHProtection')">SHP</button>
+                <button class="tabLink" onclick="changeTabs(event, 'SHHeating')">SHH</button>
+            </div>
 
-                  <!--Add a user profile-->
-                  <div name="createForm">
-                      <p>Add a new role:</p>
-                      <select name="roles" id="roleSelect">
-                          <option value="Parent">Parent</option>
-                          <option value="Child">Child</option>
-                          <option value="Guest">Guest</option>
-                          <option value = "Stranger">Stranger</option>
-                      </select>
-                      <input type="button" onclick="onAddUserSubmit()" value="Add user">
-                  </div>
+            <div id="SHSystem" class="tabcontent">
+                Smart Home System Components
+                <h2>User Management</h2>
 
-                  <br>
-                  <br>
+                <!--Add a user profile-->
+                <div name="createForm">
+                    <p>Add a new role:</p>
+                    <select name="roles" id="roleSelect">
+                        <option value="Parent">Parent</option>
+                        <option value="Child">Child</option>
+                        <option value="Guest">Guest</option>
+                        <option value="Stranger">Stranger</option>
+                    </select>
+                    <input type="button" onclick="onAddUserSubmit()" value="Add user">
+                </div>
 
-                  <!--Edit a user profile-->
-                  <div name="editForm">
-                      <div>Current Registered Users</div>
-                      <div id="availableUsers">
-                          <select id="currentUsersList"></select>
-                      </div>
-                      <br>
-                      <div>Select a new role for the user:
-                          <select id="newRole">
-                              <option value="Parent">Parent</option>
-                              <option value="Child">Child</option>
-                              <option value="Guest">Guest</option>
-                              <option value = "Stranger">Stranger</option>
-                          </select>
-                      </div>
+                <br>
+                <br>
 
-                      <br>
-                      <input type="button" value="Edit Selected User" onclick="onSubmitEditForm()">
-                      <input type="button" value="Delete Selected User" onclick="onSubmitDeleteUser()">
-                      <input input type="button" value="Login Selected User" onclick="onLoginSubmit()">
-                  </div>
+                <!--Edit a user profile-->
+                <div name="editForm">
+                    <div>Current Registered Users</div>
+                    <div id="availableUsers">
+                        <select id="currentUsersList"></select>
+                    </div>
+                    <br>
+                    <div>Select a new role for the user:
+                        <select id="newRole">
+                            <option value="Parent">Parent</option>
+                            <option value="Child">Child</option>
+                            <option value="Guest">Guest</option>
+                            <option value="Stranger">Stranger</option>
+                        </select>
+                    </div>
 
-                  <!--Delete a user profile-->
-                  <div id="deleteForm">
+                    <br>
+                    <input type="button" value="Edit Selected User" onclick="onSubmitEditForm()">
+                    <input type="button" value="Delete Selected User" onclick="onSubmitDeleteUser()">
+                    <input input type="button" value="Login Selected User" onclick="onLoginSubmit()">
+                </div>
 
-                  </div>
-                  <br>
-              </div>
-      
-              <div id="SHCore" class="tabcontent">
-                  Smart Home Core Components
-              </div>
-      
-              <div id="SHProtection" class="tabcontent">
-                  Smart Home Protection Components
-              </div>
-      
-              <div id="SHHeating" class="tabcontent">
-                  Smart Home Heating Components
-              </div>
-      
-          </div>
-          <div class="house-diagram">
-              <button onclick="renderLayout()">Click to render the layout</button>
-        
-              <canvas id="myCanvas" width="500" height="400"
-          style="border:1px solid black;">
-          Your browser does not support the canvas element.
-          </canvas>
-             <h3>Controlling: </h3>
-             <select name="" id="control_option">
-                 <option value="1">1</option>
-                 <option value="2">2</option>
-                 <option value="3">3</option>
-                 <option value="4">4</option>
-             </select>
-             <h4>Use arrow button to move </h4>
-          </div>
-          <!-- Popup form -->
-          <button class="open-button" onclick="openForm()">Open Form</button>
+                <!--Delete a user profile-->
+                <div id="deleteForm">
 
-            <div class="form-popup" id="myForm">
+                </div>
+                <br>
+            </div>
+
+            <div id="SHCore" class="tabcontent">
+                Smart Home Core Components
+            </div>
+
+            <div id="SHProtection" class="tabcontent">
+                Smart Home Protection Components
+            </div>
+
+            <div id="SHHeating" class="tabcontent">
+                Smart Home Heating Components
+            </div>
+
+        </div>
+        <div class="house-diagram">
+            <button onclick="renderLayout()">Click to render the layout</button>
+
+            <canvas id="myCanvas" width="500" height="400" style="border:1px solid black;">
+                Your browser does not support the canvas element.
+            </canvas>
+            <h3>Controlling: </h3>
+            <select name="" id="control_option">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <h4>Use arrow button to move </h4>
+        </div>
+        <!-- Popup form -->
+        <button class="open-button" onclick="openForm()">Open Form</button>
+
+        <div class="form-popup" id="myForm">
             <form action="" class="form-container">
                 <h1>Add obstacle</h1>
                 <div id="showCreatedUsers"></div>
@@ -173,11 +172,11 @@
                 <button type="button" class="btn" onclick="resetCoordinates()">Reset obstacle</button>
                 <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
             </form>
-            </div>
-             <!-- Popup form -->
-          <div class = "console">Console Here</div>
-=======
-        
+        </div>
+        <!-- Popup form -->
+        <div class="console">Console Here</div>
+        =======
+
     </div>
 
     <script>
@@ -217,11 +216,18 @@
             document.getElementById('SHSystem').style.display = "none";
         }
 
-        
+
 
         function resetCoordinates() {
             document.getElementById('xAxis').value = null;
             document.getElementById('yAxis').value = null;
+            //the following code does not work for now
+            xAxis = 0;
+            yAxis = 0;
+            obstacle.width = 0;
+            obstacle.height = 0;
+            obstacle.update();
+            renderLayout();
         }
     </script>
 

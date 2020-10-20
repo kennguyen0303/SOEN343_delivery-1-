@@ -335,17 +335,37 @@ function openForm() {
     document.getElementById("myForm").style.display = "none";
   }
 
+  var xAxis = 0;
+  var yAxis = 0;
+  var obstacle = null;
   function onCoordinatesSubmit() {
-    var x = document.getElementById('xAxis').value;
-    var y = document.getElementById('yAxis').value;
+    xAxis = document.getElementById('xAxis').value;
+    yAxis = document.getElementById('yAxis').value;
 
     //validation
-    if (x < 0 || y < 0) {
+    if (xAxis < 0 || yAxis < 0) {
         alert("input error");
     }
     else {
-        var temp_door = new door(10, 10, "green", x, y, "horizontal");
-        temp_door.update();
+        obstacle = new door(10, 10, "green", xAxis, yAxis, "horizontal");
+        obstacle.update();
+    }
+
+    //block the door1
+    if(xAxis>40 && xAxis<50 && yAxis>192 && yAxis<207) {
+        //change the boundary of door1
+        door_array[0].boundary = [door_array[0].x, xAxis-20];
+    }
+    if(xAxis>133 && xAxis<148 && yAxis>40 && yAxis<50){
+        //change the boundary of door2
+        door_array[1].boundary = [door_array[1].y, yAxis-20];
+
+    }
+    if(xAxis>283 && xAxis<298 && yAxis>80 && yAxis<90) {
+        door_array[2].boundary = [door_array[2].y, yAxis-20];
+    }
+    if(xAxis>283 && xAxis<298 && yAxis>280 && yAxis<290) {
+        door_array[3].boundary = [door_array[3].y, yAxis-20];
     }
 
 }
