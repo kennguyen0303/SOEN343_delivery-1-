@@ -372,21 +372,7 @@ function openForm() {
 
 
 function startTime() {
-	var month = ["January", "February", "March", "April","May", "June","July", "August", "September", "October", "November", "December"];
-  var today = new Date();
-  var h = today.getHours();
-  var m = today.getMinutes();
-  var s = today.getSeconds();
-  var d = today.getDate();
-  var mon = month[today.getMonth()];
-  m = checkTime(m);
-  s = checkTime(s);
-  document.getElementById('time').innerHTML =
-  mon + "," + d + "," + h + ":" + m + ":" + s;
-  var t = setTimeout(startTime, 500);
-  console.log(mon + "," + d + "," + h + ":" + m + ":" + s)
-}
-function checkTime(i) {
-  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-  return i;
+	var today = new Date();
+	document.getElementById('time').innerHTML = today.toLocaleString("en-US");
+	var t = setTimeout(startTime, 500);
 }
