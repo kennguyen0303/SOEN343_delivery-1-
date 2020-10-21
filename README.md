@@ -5,7 +5,7 @@
 
 2. Shijun Deng - AlexSDJ
 
-3. Abdalla Osman - Abdala
+3. Abdalla Osman - abda9725 (His commits can be found on branch dashboard-leftSide; they were integrated into Nathan commit by accident)
 
 4. Daniela Venuta - Daniela Venuata
 
