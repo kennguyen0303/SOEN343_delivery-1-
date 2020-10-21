@@ -15,4 +15,4 @@
 
 A snapshot from the User Interface
 
-<img src="Snapshot.png"/>
+<img src="Snapshot.PNG"/>
