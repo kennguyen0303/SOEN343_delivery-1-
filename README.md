@@ -7,7 +7,7 @@
 
 3. Abdalla Osman - abda9725 (His commits can be found on branch dashboard-leftSide; they were integrated into Nathan commit by accident)
 
-4. Daniela Venuta - Daniela Venuata
+4. Daniela Venuta - daniela-venuta
 
 5. Nathan Ziri - Nathan Ziri
 
